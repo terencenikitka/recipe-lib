@@ -10,6 +10,9 @@ import os
 # Local imports
 from config import app, db, api
 
+from models import Cuisine, Ingredient,RecipeCuisine,RecipeIngredient,Recipe,Chef,Comment
+
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get(
     "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
