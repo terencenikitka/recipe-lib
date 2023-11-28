@@ -1,8 +1,8 @@
-"""add 3 columns
+"""3 Columns
 
-Revision ID: dd99d05b0233
-Revises: b36675bb882e
-Create Date: 2023-11-28 08:15:54.597700
+Revision ID: a118e8add935
+Revises: 55a0eceaaeb5
+Create Date: 2023-11-28 09:35:30.087366
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'dd99d05b0233'
-down_revision = 'b36675bb882e'
+revision = 'a118e8add935'
+down_revision = '55a0eceaaeb5'
 branch_labels = None
 depends_on = None
 
