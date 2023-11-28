@@ -24,8 +24,8 @@ if __name__ == '__main__':
         Ingredient.query.delete()
         Cuisine.query.delete()
         #adding chefs
-        c1 = Chef(name="Peyton",bio="SomeIntrestingBio",pic="SomePicUrl")
-        c2 = Chef(name="Nikita",bio="SomeIntrestingBio",pic="SomePicUrl") 
+        c1 = Chef(name="Peyton",bio="SomeIntrestingBio",pic="SomePicUrl",password = '123')
+        c2 = Chef(name="Nikita",bio="SomeIntrestingBio",pic="SomePicUrl", password = 'ss') 
         c3 = Chef(name="Mateusz",bio="SomeIntrestingBio",pic="SomePicUrl")
         db.session.add_all([c1,c2,c3])
         db.session.commit()

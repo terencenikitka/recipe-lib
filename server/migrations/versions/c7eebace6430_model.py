@@ -1,8 +1,8 @@
-"""Models
+"""Model
 
-Revision ID: 55a0eceaaeb5
+Revision ID: c7eebace6430
 Revises: 
-Create Date: 2023-11-28 08:31:20.990671
+Create Date: 2023-11-28 09:34:19.850075
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '55a0eceaaeb5'
+revision = 'c7eebace6430'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,6 +40,9 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('image', sa.String(), nullable=True),
     sa.Column('created_date', sa.DateTime(), nullable=True),
+    sa.Column('difficulty', sa.String(), nullable=True),
+    sa.Column('cook_time', sa.Integer(), nullable=True),
+    sa.Column('instruction', sa.String(), nullable=True),
     sa.Column('chef_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['chef_id'], ['chefs.id'], name=op.f('fk_recipes_chef_id_chefs')),
     sa.PrimaryKeyConstraint('id')

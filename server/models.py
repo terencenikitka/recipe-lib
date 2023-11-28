@@ -66,6 +66,7 @@ class Chef(db.Model, SerializerMixin):
     name = db.Column(db.String)
     bio = db.Column(db.String)
     pic = db.Column(db.String)
+    password = db.Column(db.Integer, nullable = False)
 
     comments = db.relationship('Comment', back_populates='chef')
     recipes = db.relationship('Recipe', back_populates='chef')
