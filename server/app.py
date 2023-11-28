@@ -3,15 +3,25 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request
+from flask import request, make_response, jsonify
 from flask_restful import Resource
+import os
 
 # Local imports
 from config import app, db, api
-# Add your model imports
+
+from models import Cuisine, Ingredient,RecipeCuisine,RecipeIngredient,Recipe,Chef,Comment
 
 
-# Views go here!
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DATABASE = os.environ.get(
+    "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
+
 
 @app.route('/')
 def index():
