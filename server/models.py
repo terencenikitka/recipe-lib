@@ -53,7 +53,6 @@ class Recipe(db.Model, SerializerMixin):
     instruction = db.Column(db.String)
 
     chef_id = db.Column(db.Integer, db.ForeignKey('chefs.id'))   
-    comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
 
     chef = db.relationship('Chef', back_populates='recipes')
     comments = db.relationship('Comment', back_populates='recipe')
