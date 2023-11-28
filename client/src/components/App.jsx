@@ -18,10 +18,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/")
+    if (!isLoggedIn) {
+      navigate("/login", {replace: true})
     } else {
-      navigate("/login")
+      navigate("/")
     }
   }, [isLoggedIn])
 
@@ -29,7 +29,7 @@ function App() {
   return ( 
     <div>
       <header>
-      {isLoggedIn ? <NavBar logout={logout}/> : <Navigate to="/login" />}  
+      {isLoggedIn ? <NavBar logout={logout}/> : null}  
       </header>
       <Outlet context={login}/>
       
