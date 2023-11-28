@@ -1,4 +1,4 @@
-import NavBar from "./NavBar";
+
 
 function Search(){
     return (

@@ -1,6 +1,12 @@
-import NavBar from "./NavBar";
+import { useEffect, useState } from "react";
 
 function Recipes(){
+    const [recipes, setRecipes] = useState([])
+
+    useEffect(() => {
+        
+    })
+
     return (
         <div>
             <main>

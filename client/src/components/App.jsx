@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Outlet, useNavigate, Navigate } from "react-router-dom";
+
+
 import NavBar from "./NavBar";
 import Home from "./Home";
 
@@ -22,6 +24,7 @@ function App() {
       navigate("/login")
     }
   }, [isLoggedIn])
+
 
   return ( 
     <div>
