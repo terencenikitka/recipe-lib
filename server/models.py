@@ -48,6 +48,9 @@ class Recipe(db.Model, SerializerMixin):
     name = db.Column(db.String)
     image = db.Column(db.String)
     created_date = db.Column(db.DateTime)
+    difficulty = db.Column(db.String)
+    cook_time = db.Column(db.Integer)
+    instruction = db.Column(db.String)
 
     chef_id = db.Column(db.Integer, db.ForeignKey('chefs.id'))   
     comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
