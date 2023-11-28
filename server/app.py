@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# секретное сообщение 
 # Standard library imports
 import os
 # Remote library imports
@@ -41,7 +41,17 @@ class Ingredients (Resource):
         all_ingredients = Ingredient.query.all()
         ingredient_data = [ingredient.to_dict(rules=('-recipe_ingredients',))for ingredient in all_ingredients]
         return make_response(ingredient_data,200)
-        
+
+    def post(self):
+        params = request.json
+        try:
+            ingredient = Ingredient(name = params['name'])
+        except:
+            return make_response({'error':['something wrong, ask Nikita']}, 422)
+        db.session.add(ingredient)
+        db.session.commit()
+        return make_response(ingredient.to_dict(rules=('-recipe_ingredients',)), 201)               
+
 api.add_resource(Ingredients, '/ingredients')
 
 
@@ -73,8 +83,49 @@ class Recipes (Resource):
         recipe_data = [recipe.to_dict(rules = ('-chef','-comments','-recipe_ingredients','-recipe_cuisines')) for recipe in all_recipes]
         return make_response(recipe_data,200)
 
+    def post(self):
+        params = request.json
+        try:
+            recipe = Recipe(name = params['name'],image = params['image'],created_date = params['created_date'],difficulty = params['difficulty'],cook_time=params['cook_time'],instruction=params['instruction'])
+        except:
+            return make_response({'error':['something wrong,ask Nikita']},422)
+        db.session.add(recipe)
+        db.session.commit()
+        return make_response(recipe.to_dict(rules = ('-chef','-comments','-recipe_ingredients','-recipe_cuisines')),201)                    
+        
 api.add_resource(Recipes,'/recipes')        
 
+class RecipeById (Resource):
+
+    def get(self,id):
+        recipe = Recipe.query.get(id)
+        if not recipe:
+            return make_response({'error':'recipe not found'},404)
+        return make_response(recipe.to_dict(rules = ('-chef','-comments','-recipe_ingredients','-recipe_cuisines')),200)
+
+    def patch (self,id):
+        recipe = Recipe.query.get(id)
+        if not recipe:
+            return make_response({'error':'recipe not found'},404)
+        params = request.json
+        try:
+            for attr in params:
+                setattr(recipe,attr,params[attr])
+        except:
+            return make_response({'error':['something wrong, ask Nikita']},422)
+        db.session.commit()
+
+        return make_response(recipe.to_dict(rules = ('-chef','-comments','-recipe_ingredients','-recipe_cuisines')),200)
+
+    def delete(self,id):
+        recipe = Recipe.query.get(id)
+        if not recipe:
+            return make_response({'error':'recipe not found'},404)
+        db.session.delete(recipe)
+        db.session.commit()
+        return make_response('',204)        
+
+api.add_resource(RecipeById,'/recipes/<id>') 
 
 class Chefs (Resource):
 
@@ -83,8 +134,49 @@ class Chefs (Resource):
         chefs_data = [chef.to_dict(rules=('-comments', '-recipes')) for chef in all_chefs]
         return make_response(chefs_data, 200)
 
+     def post (self):
+        params = request.json
+        try:
+            chef = Chef(name=params['name'],bio=params['bio'],pic=params['pic'],password=params['password'])
+        except:
+            return make_response({'error':['something wrong ask NIkita']},422)
+        db.session.add(chef)
+        db.session.commit()
+        return make_response(chef.to_dict(rules=('-comments', '-recipes')),201)           
+
 api.add_resource(Chefs,'/chefs')
 
+class ChefById(Resource):
+
+    def get(self,id):
+        chef = Chef.query.get(id)
+        if not chef:
+            return make_response({'error':'chef not found'},404)
+        return make_response(chef.to_dict(rules=('-comments', '-recipes')),200)    
+
+    def patch(self,id):
+        chef = Chef.query.get(id)
+        if not chef:
+            return make_response({'error':'chef not found'},404)
+        params = request.json
+        try:
+            for attr in params:
+                setattr(chef,attr,params[attr])
+        except:
+            return make_response({'error':'something wrong,ask Nikita'},422)
+        db.session.commit()
+
+        return make_response(chef.to_dict(rules=('-comments', '-recipes')),200)     
+
+    def delete(self,id):
+        chef = chef.query.get(id)
+        if not chef:
+            return make_response({'error':'chef not found'},404)
+        db.session.delete(chef)
+        db.session.commit()
+        return make_response('',204)                       
+
+api.add_resource(ChefById,'/chefs/<id>')
 
 class Comments (Resource):
 
@@ -93,9 +185,49 @@ class Comments (Resource):
         comment_data = [comment.to_dict(rules = ('-chef','-recipe')) for comment in all_comments]
         return make_response(comment_data,200)
 
+    def post (self):
+        params = request.json
+        try:
+            comment = Comment(comment_text = params['comment_text'],created_date = params['created_date'],chef_id=params['chef_id'],recipe_id=params['recipe_id'])    
+        except:
+            return make_response({'error':['something wrong, ask Nikita']},422)
+        db.session.add(comment)
+        db.session.commit()
+        return make_response(comment.to_dict(rules = ('-chef','-recipe')),201)    
+
 api.add_resource(Comments,'/comments')        
 
+class CommentById (Resource):
+    
+    def get(self,id):
+        comment = Comment.query.get(id)
+        if not comment:
+            return make_response({'error':'comment not found'},404)
+        return make_response(comment.to_dict(rules = ('-chef','-recipe')),200)    \
 
+    def patch (self,id):
+        comment = Comment.query.get(id)
+        if not comment:
+            return make_response({'error':'comment not found'},404)
+        params=request.json
+        try:
+            for attr in params:
+                setattr(comment,attr,params[attr])
+        except:
+            return make_response({'error':['something wrong, ask Nikita']},422)
+        db.session.commit()
+
+        return make_response(comment.to_dict(rules = ('-chef','-recipe')),200)         
+
+    def delete (self,id):
+        comment = Comment.query.get(id)
+        if not comment:
+            return make_response({'error':'comment not found'},404)
+        db.session.delete(comment)
+        db.session.commit()
+        return make_response('',204)                   
+
+api.add_resource(CommentById,'/comments/<id>')   
 
 
 @app.route('/')
