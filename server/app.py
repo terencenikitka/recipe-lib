@@ -137,7 +137,7 @@ class Chefs (Resource):
      def post (self):
         params = request.json
         try:
-            chef = Chef(name=params['name'],bio=params['bio'],pic=params['pic'],password=params['password'])
+            chef = Chef(first_name=params['first_name'],bio=params['bio'],pic=params['pic'],password=params['password'],last_name=params['last_name'],email=params['email'])
         except:
             return make_response({'error':['something wrong ask NIkita']},422)
         db.session.add(chef)

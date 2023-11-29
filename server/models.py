@@ -11,6 +11,7 @@ class Cuisine(db.Model, SerializerMixin):
 
     recipe_cuisines = db.relationship('RecipeCuisine', back_populates='cuisine')
 
+
 class Ingredient(db.Model, SerializerMixin):
     __tablename__ = 'ingredients'
 
@@ -63,10 +64,13 @@ class Chef(db.Model, SerializerMixin):
     __tablename__ = 'chefs'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
     bio = db.Column(db.String)
     pic = db.Column(db.String)
     password = db.Column(db.Integer, nullable = False)
+    email = db.Column(db.String)
+
 
     comments = db.relationship('Comment', back_populates='chef')
     recipes = db.relationship('Recipe', back_populates='chef')
