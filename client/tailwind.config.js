@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'signup': "url('https://source.unsplash.com/Mv9hjnEUHR4/600x800')"
+      }
+    },
     screens: {
       'sm': '640px',
       'md': '768px',
@@ -30,7 +34,21 @@ module.exports = {
     require("daisyui")
   ],
   daisyui: {
-    themes: ["retro", "luxury"],
+    themes: ["autumn", 
+      {
+          mytheme: {
+          "primary": "#9b2226",
+          "secondary": "#ee9b00",
+          "accent": "#00334D",
+          "neutral": "#e1bb80",
+          "base-100": "#000814",
+          "info": "#669bbc",
+          "success": "#548c2f",
+          "warning": "#ffc300",        
+          "error": "#c1121f",
+          },
+        },
+    ],
   },
 }
 

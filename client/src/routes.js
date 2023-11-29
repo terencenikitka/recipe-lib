@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Recipes from "./components/Recipes";
 import Search from "./components/Search";
+import Signup from "./components/Signup";
 
 
 const routes = [
@@ -32,6 +33,10 @@ const routes = [
             {
                 path: "/search",
                 element: <Search />
+            },
+            {
+                path: "/signup",
+                element: <Signup />
             }
         ]
     }

@@ -29,7 +29,7 @@ function Recipes(){
 
     return (
         <div className="container">
-            <div className="recipe-container">
+            <div className="recipe-container columns-3">
                 {recipes.slice(0, visibleRecipes).map(recipe => (
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 ))}

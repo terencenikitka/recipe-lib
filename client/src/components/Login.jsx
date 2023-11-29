@@ -45,7 +45,7 @@ function Login(){
                     onChange={handleChange}
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button className="btn btn-primary" type="submit">Login</button>
             </form>
         </div>
     )

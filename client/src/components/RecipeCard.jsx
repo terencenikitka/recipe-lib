@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 function RecipeCard(props){
-    const {id, cook_time, created_date, difficulty, image, instruction, name} = props.recipe
+    const {cook_time, created_date, difficulty, image, instruction, name} = props.recipe
 
     const [formattedDate, setFormattedDate] = useState("")
 
@@ -16,16 +16,19 @@ function RecipeCard(props){
     }, [created_date])
 
     return (
-        <div className="recipe-card">
-            <h3>{name}</h3>
-            <div className="img-container">
-                <img src={image} alt={name}></img>
-            </div>
-            <div className="recipe-info">
-                <p>Level: {difficulty}</p>
-                <p>{cook_time} minutes</p>
-                <p>Directions: <br></br> {instruction}</p>
-                <p>Published on: {formattedDate}</p>
+        <div className="card w-20 md:w-40 lg:w-60 xl:w-80 bg-base-100 shadow-xl max-h-min rounded-xl">
+            <div className="justify-center rounded-xl" >
+                <figure className="">
+                    <img src={image} alt={name} className="max-h-min object-cover md:h-full w-fit" />
+                </figure>
+                <div className="card-body w-fit h-fit ">
+                    <h1 className="card-title justify-center text-center font-sans">{name}</h1>
+                    <p className=" text-base text-center font-mono">Difficulty: {difficulty}</p>
+                    <p className=" text-base text-center font-mono">Cook Time: {cook_time} Minutes</p>
+                    <div className="card-actions justify-center">
+                        <button className="btn btn-secondary">View More</button>
+                    </div>
+                </div>
             </div>
         </div>
     )
