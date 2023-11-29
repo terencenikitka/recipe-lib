@@ -129,12 +129,12 @@ api.add_resource(RecipeById,'/recipes/<id>')
 
 class Chefs (Resource):
 
-     def get(self):
+    def get(self):
         all_chefs = Chef.query.all()
         chefs_data = [chef.to_dict(rules=('-comments', '-recipes')) for chef in all_chefs]
         return make_response(chefs_data, 200)
 
-     def post (self):
+    def post (self):
         params = request.json
         try:
             chef = Chef(first_name=params['first_name'],bio=params['bio'],pic=params['pic'],password=params['password'],last_name=params['last_name'],email=params['email'])
