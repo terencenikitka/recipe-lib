@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 function Signup(){
     
-    const [newChefName, setNewChefName] = useState('')
+    const [newChefFirstName, setNewChefFirstName] = useState('')
+    const [newChefLastName, setNewChefLastName] = useState('')
+    const [newChefEmail, setNewChefEmail] = useState('')
     const [newChefPassword, setNewChefPassword] = useState('')
     const [newChefPic, setNewChefPic] = useState('')
     const [newChefBio, setNewChefBio] = useState('')
     const [file, setFile] = useState()
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [passwordsMatch, setPasswordsMatch] = useState(true)
     const navigate = useNavigate()
 
     function handlePhotoChange(e) {
@@ -15,10 +19,15 @@ function Signup(){
         setFile(URL.createObjectURL(e.target.files[0]))
         setNewChefPic(e.target.files[0].name)
     }
-  
+
+    useEffect(() => {
+        setPasswordsMatch(newChefPassword === confirmPassword)
+    }, [newChefPassword, confirmPassword])
 
     const newChefData = {
-        name: newChefName,
+        first_name: newChefFirstName,
+        last_name: newChefLastName,
+        email: newChefEmail,
         password: newChefPassword,
         bio: newChefBio,
         pic: newChefPic
@@ -39,6 +48,7 @@ function Signup(){
             .then(() => {
                 navigate('/profile');
             });
+            .catch((error) => console.error('POST error', error));
     }
 
     return (
@@ -61,7 +71,7 @@ function Signup(){
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="firstName"
                                             type="text"
-                                            placeholder="First Name" required onChange={(e) => setNewChefName(e.target.value)}
+                                            placeholder="First Name" required onChange={(e) => setNewChefFirstName(e.target.value)}
                                         />
                                     </div>
                                     <div className="md:ml-2">
@@ -72,7 +82,7 @@ function Signup(){
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="lastName"
                                             type="text"
-                                            placeholder="Last Name"
+                                            placeholder="Last Name" required onChange={(e) => setNewChefLastName(e.target.value)}
                                         />
                                     </div>
                                 </div>
@@ -84,21 +94,21 @@ function Signup(){
                                         className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                         id="email"
                                         type="email"
-                                        placeholder="Email"
+                                        placeholder="Email" required onChange={(e) => setNewChefEmail(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 md:flex md:justify-between">
                                     <div className="mb-4 md:mr-2 md:mb-0">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="password" >
+                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="password" >Password
                                         </label>
                                         <input
                                             className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
                                             type="password"
-                                            placeholder="******************" required
+                                            placeholder="******************" required value={newChefPassword}
                                             onChange={(e) => setNewChefPassword(e.target.value)}
                                         />
-                                        <p className="text-xs italic text-red-500">Please choose a password.</p>
+                                        
                                     </div>
                                     <div className="md:ml-2">
                                         <label className="block mb-2 text-sm font-bold text-gray-700" for="c_password">
@@ -108,15 +118,20 @@ function Signup(){
                                             className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="c_password"
                                             type="password"
-                                            placeholder="******************"
+                                            placeholder="******************" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                                         />
+                                        
                                     </div>
+                                    
+                                </div>
+                                <div className="flex">
+                                        {!passwordsMatch && <p className="w-2/3 h-full px-4 py-2 mb-3 text-xs text-center italic text-gray-light bg-error shadow-md rounded-md self-stretch ml-10">Password confirmation does not match!</p>}
                                 </div>
                                 <div>
                                     <label className="block mb-4 text-sm font-bold text-gray-700 custom-file-upload" for="prof_pic">Upload a Profile Pic </label>
-                                    <div className="flex items-center">
+                                    <div className="flex items-center flex-col gap-y-3">
                                         <input className="file-input file-input-bordered file-input-info file-input-sm w-full max-w-xs text-sm" type="file" onChange={handlePhotoChange}></input>
-                                        <img className="ml-10" src={file} />
+                                        <img className="rounded-md drop-shadow-md" src={file} />
                                     </div>
                                     <label className="block mb-4 text-sm font-bold text-gray-700 pt-7">
                                         <span className="mb-1">About Me</span>
@@ -127,7 +142,7 @@ function Signup(){
                                 <div className="mb-6 text-center">
                                     <button
                                         className="btn-primary btn w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                        type="submit"
+                                        type="submit" disabled={!passwordsMatch}
                                     >
                                         Register Account
                                     </button>
@@ -138,7 +153,7 @@ function Signup(){
                                     <p>Already have an account?</p>
                                     <a
                                         className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800 mt-1.5 underline"
-                                        href="#"
+                                        onClick={() => navigate('/login')}
                                     >
                                         Login!
                                     </a>
