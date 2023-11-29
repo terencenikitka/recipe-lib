@@ -43,12 +43,12 @@ function Signup(){
             },
             body: JSON.stringify(newChefData),
         })
-            .then((r) => r.json())
-            .then(() => console.log(newChefData))
+            .then((r) => r.json()).catch((error) => {console.error('POST error', error)})
+            
             .then(() => {
                 navigate('/profile');
-            });
-            .catch((error) => console.error('POST error', error));
+            })
+            ;
     }
 
     return (
