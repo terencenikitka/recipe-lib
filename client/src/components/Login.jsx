@@ -5,7 +5,7 @@ function Login(){
 
     const login = useOutletContext()
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
@@ -25,7 +25,7 @@ function Login(){
         <div>
             <h1>Welcome back!</h1>
             <form onSubmit={handleLogin}>
-                <label for="username">Username</label>
+                <label for="email">Email</label>
                 <div>
                     <input
                     id="username"

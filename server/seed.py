@@ -24,11 +24,12 @@ if __name__ == '__main__':
         Ingredient.query.delete()
         Cuisine.query.delete()
         #adding chefs
-        # c1 = Chef(name="Peyton",bio="SomeIntrestingBio",pic="SomePicUrl",password = '123')
-        # c2 = Chef(name="Nikita",bio="SomeIntrestingBio",pic="SomePicUrl", password = 'ss') 
-        # c3 = Chef(name="Mateusz",bio="SomeIntrestingBio",pic="SomePicUrl", password = '123')
-        # db.session.add_all([c1,c2,c3])
-        # db.session.commit()
+        c1 = Chef(first_name="Peyton", last_name="Meredith",bio="SomeIntrestingBio",pic="SomePicUrl",password = '123', email="peymeredith@gmail.com")
+        c2 = Chef(first_name="Nikita", last_name="Maslakov", bio="SomeIntrestingBio",pic="SomePicUrl", password = 'ss', email="something@gmail.com") 
+        c3 = Chef(first_name="Mateusz", last_name="Trybunia", bio="SomeIntrestingBio",pic="SomePicUrl", password = '123', email="somethingelse@gmail.com" )
+        db.session.add_all([c1,c2,c3])
+        db.session.commit()
+        
         #adding Recipes
         r1 = Recipe(name="Peanut Butter and Jelly Sandwich", image="https://t.ly/JFSIc",
                 created_date=datetime.now(), difficulty="Easy", cook_time=10, instruction="1. On one slice of bread, spread peanut butter evenly over the bread.\n2. On the other slice of bread, spread the jelly evenly over the bread.\n3. Put the two slices of bread together with the peanut butter and jelly facing in.\n4. Serve and enjoy!\n5. Optional: Remove crusts, cut diagonally", chef_id=3)

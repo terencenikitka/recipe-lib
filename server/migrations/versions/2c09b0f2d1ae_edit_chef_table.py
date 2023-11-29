@@ -1,8 +1,8 @@
-"""add first_name,last_name,email columns
+"""edit chef table
 
-Revision ID: 760192eaf44f
+Revision ID: 2c09b0f2d1ae
 Revises: 
-Create Date: 2023-11-29 08:27:05.441485
+Create Date: 2023-11-29 10:11:01.465693
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '760192eaf44f'
+revision = '2c09b0f2d1ae'
 down_revision = None
 branch_labels = None
 depends_on = None
