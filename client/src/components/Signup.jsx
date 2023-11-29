@@ -11,14 +11,17 @@ function Signup(){
     const navigate = useNavigate()
 
     function handlePhotoChange(e) {
-        console.log(e.target.files)
+        console.log(e.target.files[0].name)
         setFile(URL.createObjectURL(e.target.files[0]))
+        setNewChefPic(e.target.files[0].name)
     }
+  
 
     const newChefData = {
         name: newChefName,
         password: newChefPassword,
-        bio: newChefBio
+        bio: newChefBio,
+        pic: newChefPic
     }
 
     function handleSubmit(e) {
@@ -32,8 +35,8 @@ function Signup(){
             body: JSON.stringify(newChefData),
         })
             .then((r) => r.json())
-            .then((newChef) => {
-                ;
+            .then(() => console.log(newChefData))
+            .then(() => {
                 navigate('/profile');
             });
     }
@@ -86,14 +89,14 @@ function Signup(){
                                 </div>
                                 <div className="mb-4 md:flex md:justify-between">
                                     <div className="mb-4 md:mr-2 md:mb-0">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="password" required onChange={(e) => setNewChefPassword(e.target.value)}>
-                                            Password
+                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="password" >
                                         </label>
                                         <input
                                             className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
                                             type="password"
                                             placeholder="******************" required
+                                            onChange={(e) => setNewChefPassword(e.target.value)}
                                         />
                                         <p className="text-xs italic text-red-500">Please choose a password.</p>
                                     </div>
