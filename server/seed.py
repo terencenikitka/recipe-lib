@@ -24,11 +24,11 @@ if __name__ == '__main__':
         Ingredient.query.delete()
         Cuisine.query.delete()
         #adding chefs
-        c1 = Chef(name="Peyton",bio="SomeIntrestingBio",pic="SomePicUrl",password = '123')
-        c2 = Chef(name="Nikita",bio="SomeIntrestingBio",pic="SomePicUrl", password = 'ss') 
-        c3 = Chef(name="Mateusz",bio="SomeIntrestingBio",pic="SomePicUrl", password = '123')
-        db.session.add_all([c1,c2,c3])
-        db.session.commit()
+        # c1 = Chef(name="Peyton",bio="SomeIntrestingBio",pic="SomePicUrl",password = '123')
+        # c2 = Chef(name="Nikita",bio="SomeIntrestingBio",pic="SomePicUrl", password = 'ss') 
+        # c3 = Chef(name="Mateusz",bio="SomeIntrestingBio",pic="SomePicUrl", password = '123')
+        # db.session.add_all([c1,c2,c3])
+        # db.session.commit()
         #adding Recipes
         r1 = Recipe(name="Peanut Butter and Jelly Sandwich", image="https://t.ly/JFSIc",
                 created_date=datetime.now(), difficulty="Easy", cook_time=10, instruction="1. On one slice of bread, spread peanut butter evenly over the bread.\n2. On the other slice of bread, spread the jelly evenly over the bread.\n3. Put the two slices of bread together with the peanut butter and jelly facing in.\n4. Serve and enjoy!\n5. Optional: Remove crusts, cut diagonally", chef_id=3)
@@ -48,7 +48,7 @@ if __name__ == '__main__':
         db.session.commit()
         #adding Recipe_cuisine
         rc1 = RecipeCuisine(recipe_id=2,cuisine_id=1)
-        rc2 = RecipeCuisine(recipe_id=3,cuisine_id=1)
+        rc2 = RecipeCuisine(recipe_id=3,cuisine_id=1)   
         rc3 = RecipeCuisine(recipe_id=1,cuisine_id=2)
         db.session.add_all([rc1,rc2,rc3])
         db.session.commit()
