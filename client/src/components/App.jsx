@@ -8,6 +8,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogoutAlert, setShowLogoutAlert] = useState(false)
+  const [chefs, setChefs] = useState([])
   const navigate = useNavigate()
 
   const login = () => {
@@ -23,12 +24,39 @@ function App() {
       navigate("/", {replace: true})
     }}, [isLoggedIn])
 
+    useEffect(() => {
+        fetch("http://127.0.0.1:5555/chefs")
+            .then( r => {
+                if (r.ok) {
+                    return r.json()
+                }
+                throw r
+            })
+            .then((chefsData) => {
+                setChefs(chefsData)
+                console.log('Chefs Data:', chefsData)
+            })
+            .catch((e) => {
+                console.error("Error fetching chefs:", e)
+            })
+    }, [])
+
+  console.log(chefs)
+
+  const context = {
+    chefs,
+    login
+  }
 
   return ( 
     <div className="bg-base-100 flex">
-      <header>
+      <header className="w-20 h-10">
         <NavBar isLoggedIn={isLoggedIn} logout={logout} login={login} />  
       </header>
+      <div className="w-20">
+        {chefs.map((chef) => (
+          <a key={chef.id} onClick={() => navigate(`/profile/${chef.id}`)}>{chef.first_name}</a>))}
+      </div>
       {showLogoutAlert && (
         <div role="alert" className={`alert alert-success custom-alert ${showLogoutAlert ? 'fadeout' : 'fadein'}`} onAnimationEnd={() => setShowLogoutAlert(false)} style={{display: showLogoutAlert ? 'block': 'none'}}>
           <svg
@@ -47,11 +75,11 @@ function App() {
           <span>You have been successfully logged out!</span>
         </div>
       )}
+      
+      
       <div className="flex-1">
-        <Outlet context={login}/>
+        <Outlet context={context}/>
       </div>
-      
-      
     </div>
     
 );

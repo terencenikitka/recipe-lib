@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&display=swap');
 
 .custom-alert {
   width: fit-content;
@@ -38,6 +40,14 @@
 .custom-file-upload {
   display: inline-block;
   position: relative;
+}
+
+[data-theme="mytheme"] .btn {
+  border-width: 2px;
+}
+
+[data-theme="autumn"] .btn {
+  border-width: 2px;
 }
 
 /* .custom-file-upload input {

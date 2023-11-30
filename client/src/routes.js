@@ -28,7 +28,13 @@ const routes = [
             },
             {
                 path: "/profile",
-                element: <Profile />
+                element: <Profile />,
+                children: [
+                    {
+                        path: ':chefId',
+                        element: <Profile />
+                    }
+                ]
             },
             {
                 path: "/search",

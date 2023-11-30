@@ -51,7 +51,7 @@ function NavBar({ logout, isLoggedIn }) {
     }
     
     const toggleTheme = () => {
-        setTheme(theme === 'mytheme' ? 'autumn' : 'mytheme')
+        setTheme(theme === 'business' ? 'autumn' : 'business')
     }
 
     useEffect(() => {

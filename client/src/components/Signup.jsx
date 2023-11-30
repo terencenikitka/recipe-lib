@@ -52,34 +52,36 @@ function Signup(){
     }
 
     return (
-        <div className="font-mono bg-gray-400 max-w-2xl">
+        <div className="container flex   font-mono max-w-2xl  ">
             
-            <div className="container mx-auto bg-secondary text-primary w-md">
-                <div className="flex my-12 items-stretch">
+            <div className=" mx-auto bg-neutral text-primary max-w ">
+                <div className="my-12">
                     
-                    <div className=" xl:w-3/4 lg:w-11/12 flex-1 justify-center items-stretch">
+                    <div className="  ">
 
-                        <div className="w-7/12 bg-white p-1 rounded-lg lg:rounded-l-none items-stretch">
-                            <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
-                            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={handleSubmit}>
-                                <div className="mb-4 md:flex md:justify-center">
-                                    <div className="mb-4 md:mr-2 md:mb-0">
+                        <div className="w-fill bg-white p-1 rounded-lg lg:rounded-l-none ">
+                            <div className="text-center bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary underline decoration-solid">
+                                <h3 className="pt-1 text-4xl uppercase font-bodoni-moda font-extrabold  text-center text-transparent">Create an Account</h3>
+                            </div>
+                            <form className="px-12 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={handleSubmit}>
+                                <div className="mb-4 ">
+                                    <div className="mb-5">
                                         <label className="block mb-2 text-sm font-bold text-gray-700" for="firstName">
                                             First Name
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-max px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="firstName"
                                             type="text"
                                             placeholder="First Name" required onChange={(e) => setNewChefFirstName(e.target.value)}
                                         />
                                     </div>
-                                    <div className="md:ml-2">
+                                    <div className="">
                                         <label className="block mb-2 text-sm font-bold text-gray-700" for="lastName">
                                             Last Name
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-max px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="lastName"
                                             type="text"
                                             placeholder="Last Name" required onChange={(e) => setNewChefLastName(e.target.value)}
@@ -91,18 +93,18 @@ function Signup(){
                                         Email
                                     </label>
                                     <input
-                                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                        className="w-max:content px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                         id="email"
                                         type="email"
                                         placeholder="Email" required onChange={(e) => setNewChefEmail(e.target.value)}
                                     />
                                 </div>
-                                <div className="mb-4 md:flex md:justify-between">
-                                    <div className="mb-4 md:mr-2 md:mb-0">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="password" >Password
+                                <div className="mb-4 md:flex md:justify-stretch">
+                                    <div className="mb-4 md:mr-0 md:mb-0 ">
+                                        <label className="mb-2 text-sm font-bold text-gray-700 " for="password" >Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-max  text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
                                             type="password"
                                             placeholder="******************" required value={newChefPassword}
@@ -111,11 +113,11 @@ function Signup(){
                                         
                                     </div>
                                     <div className="md:ml-2">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="c_password">
+                                        <label className=" mb-2 text-sm font-bold text-gray-700" for="c_password">
                                             Confirm Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className=" px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline max-w-max"
                                             id="c_password"
                                             type="password"
                                             placeholder="******************" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
@@ -129,7 +131,7 @@ function Signup(){
                                 </div>
                                 <div>
                                     <label className="block mb-4 text-sm font-bold text-gray-700 custom-file-upload" for="prof_pic">Upload a Profile Pic </label>
-                                    <div className="flex items-center flex-col gap-y-3">
+                                    <div className="">
                                         <input className="file-input file-input-bordered file-input-info file-input-sm w-full max-w-xs text-sm" type="file" onChange={handlePhotoChange}></input>
                                         <img className="rounded-md drop-shadow-md" src={file} />
                                     </div>
