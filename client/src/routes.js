@@ -7,8 +7,7 @@ import Recipes from "./components/Recipes";
 import Search from "./components/Search";
 import Signup from "./components/Signup";
 import RecipeCardPage from "./components/RecipeCardPage";
-import RecipeCard from "./components/RecipeCard";
-
+import CreateRecipe from "./components/CreateRecipe";
 const routes = [
     {
         path: "/",
@@ -42,6 +41,10 @@ const routes = [
             {
                 path:`/recipes/:id`,
                 element: <RecipeCardPage />
+            },
+            { 
+                path:'/create_recipe',
+                element:<CreateRecipe/>
             }
         ]
     }
