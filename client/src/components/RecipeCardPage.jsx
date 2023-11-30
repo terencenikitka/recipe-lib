@@ -50,14 +50,11 @@ function RecipeCardPage() {
     const createdDate = new Date();
     const formattedDate = createdDate.toISOString().replace('T', ' ').replace('Z', '');
   
-    // Fetch the list of chefs
     fetch("http://127.0.0.1:5555/chefs")
       .then((response) => response.json())
       .then((chefs) => {
-        // Select a random chef from the list
         const randomChef = chefs[Math.floor(Math.random() * chefs.length)];
   
-        // Submit the comment with the randomly selected chef_id
         fetch("http://127.0.0.1:5555/comments", {
           method: "POST",
           headers: {
