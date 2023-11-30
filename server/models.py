@@ -70,7 +70,7 @@ class Recipe(db.Model, SerializerMixin):
     chef_id = db.Column(db.Integer, db.ForeignKey('chefs.id'))   
 
     chef = db.relationship('Chef', back_populates='recipes')
-    comments = db.relationship('Comment', back_populates='recipe')
+    # comments = db.relationship('Comment', back_populates='recipe')
     recipe_ingredients = db.relationship('RecipeIngredient', back_populates='recipe')
     recipe_cuisines = db.relationship('RecipeCuisine', back_populates='recipe')
 
@@ -111,11 +111,12 @@ class Recipe(db.Model, SerializerMixin):
         except ValueError:
             raise ValueError('Cook time must be a number!')        
 
-    @validates('intstruction')
-    def validates_instruction(self,key,new_instruction):
+    @validates('instruction')
+    def validates_instruction(self, key, new_instruction):
         if new_instruction:
-            return new_instruction
-        raise ValueError('Recipe must have a instructions otherwise how do I know how to cook a peanut butter toast?!?!?')
+         return new_instruction
+        raise ValueError('Recipe must have instructions!')
+
 
     @validates('chef_id')
     def validates_chef_id(self,key,new_chef_id):
@@ -135,7 +136,7 @@ class Chef(db.Model, SerializerMixin):
     email = db.Column(db.String)
 
 
-    comments = db.relationship('Comment', back_populates='chef')
+    # comments = db.relationship('Comment', back_populates='chef')
     recipes = db.relationship('Recipe', back_populates='chef')
 
     @validates('first_name')
@@ -192,5 +193,11 @@ class Comment(db.Model, SerializerMixin):
     chef_id = db.Column(db.Integer, db.ForeignKey('chefs.id'))    
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
 
-    chef = db.relationship('Chef', back_populates='comments')
-    recipe = db.relationship('Recipe', back_populates='comments')
+    # chef = db.relationship('Chef', back_populates='comments')
+    # recipe = db.relationship('Recipe', back_populates='comments')
+
+    @validates('comment_text')
+    def validates_comment_text(self, key, new_comment_text):
+        if new_comment_text:
+            return new_comment_text
+        raise ValueError('Comment must have text!')
