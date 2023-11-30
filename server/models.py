@@ -84,8 +84,6 @@ class Recipe(db.Model, SerializerMixin):
     def validates_image(self, key, new_image):
         if not new_image:
          raise ValueError('Recipe must have an image!')
-        if new_image[-3:] not in {'png', 'jpg'}:
-          raise ValueError('Image should be in png or jpg format!')
         return new_image 
 
     @validates('created_date')
@@ -165,8 +163,6 @@ class Chef(db.Model, SerializerMixin):
     def validates_pic(self,key,new_pic):
         if not new_pic:
          raise ValueError('Chef must have an pic!')
-        if new_pic[-3:] not in {'png', 'jpg'}:
-          raise ValueError('Pic should be in png or jpg format!')
         return new_pic 
 
     @validates('email')
