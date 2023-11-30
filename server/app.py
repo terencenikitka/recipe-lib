@@ -5,6 +5,7 @@ import os
 # Remote library imports
 from flask import request, make_response, jsonify
 from flask_restful import Resource
+from datetime import datetime
 
 
 
@@ -181,19 +182,41 @@ api.add_resource(ChefById,'/chefs/<id>')
 class Comments (Resource):
 
     def get(self):
-        all_comments = Comment.query.all()
-        comment_data = [comment.to_dict(rules = ('-chef','-recipe')) for comment in all_comments]
-        return make_response(comment_data,200)
+        recipe_id = request.args.get('recipe_id')
 
-    def post (self):
+        all_comments = Comment.query.filter_by(recipe_id=recipe_id).all()
+        comment_data = []
+
+        for comment in all_comments:
+            comment_info = comment.to_dict(rules=('chef_id', 'recipe_id'))
+            
+            # Fetch chef information and include it in the comment_data
+            chef = Chef.query.get(comment.chef_id)
+            if chef:
+                comment_info['chef_first_name'] = chef.first_name
+                comment_info['chef_last_name'] = chef.last_name
+            
+            comment_data.append(comment_info)
+
+        return make_response(comment_data, 200)
+
+    def post(self):
         params = request.json
         try:
-            comment = Comment(comment_text = params['comment_text'],created_date = params['created_date'],chef_id=params['chef_id'],recipe_id=params['recipe_id'])    
+            created_date = datetime.utcnow()
+            comment = Comment(
+                comment_text=params['comment_text'],
+                created_date=created_date,
+                chef_id=params['chef_id'],
+                recipe_id=params['recipe_id']
+            )
+          
         except:
-            return make_response({'error':['something wrong, ask Nikita']},422)
+              
+            return make_response({'error': ['something wrong with comment post, ask Nikita',comment]}, 422)
         db.session.add(comment)
         db.session.commit()
-        return make_response(comment.to_dict(rules = ('-chef','-recipe')),201)    
+        return make_response(comment.to_dict(rules=('chef', 'recipe')), 201)
 
 api.add_resource(Comments,'/comments')        
 
