@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import RecipeCard from "./RecipeCard";
 
 function RecipeCardPage() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [commentInput, setCommentInput] = useState("");
-  const [showComments, setShowComments] = useState(false); // Step 1
-  const [comments, setComments] = useState([]); // Additional state for comments
+  const [showComments, setShowComments] = useState(false); 
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +24,7 @@ function RecipeCardPage() {
         console.error("Error fetching recipe:", error);
       });
   
-    // Fetch comments when the recipe is loaded
+   
     fetch(`http://127.0.0.1:5555/comments?recipe_id=${id}`)
       .then((response) => {
         if (response.ok) {
@@ -39,7 +38,7 @@ function RecipeCardPage() {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
-  }, [id, commentInput]); // Add commentInput as a dependency
+  }, [id, commentInput]); 
 
 
 
@@ -48,7 +47,7 @@ function RecipeCardPage() {
   }
 
   function handleCommentSubmit() {
-    // Convert the comment created_date to a JavaScript Date object
+    
     const createdDate = new Date();
     const formattedDate = createdDate.toISOString().replace('T', ' ').replace('Z', '');
 
@@ -73,7 +72,7 @@ function RecipeCardPage() {
   }
 
   function handleShowComments() {
-    // Toggle the display of comments
+   
     setShowComments(!showComments);
   }
 
