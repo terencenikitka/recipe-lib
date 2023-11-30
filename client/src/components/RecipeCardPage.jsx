@@ -47,30 +47,41 @@ function RecipeCardPage() {
   }
 
   function handleCommentSubmit() {
-    
     const createdDate = new Date();
     const formattedDate = createdDate.toISOString().replace('T', ' ').replace('Z', '');
-
-    fetch("http://127.0.0.1:5555/comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        comment_text: commentInput,
-        chef_id: 1,
-        recipe_id: id,
-      }),
-    })
-      .then((r) => r.json())
-      .catch((error) => {
-        console.error('POST error', error);
+  
+    // Fetch the list of chefs
+    fetch("http://127.0.0.1:5555/chefs")
+      .then((response) => response.json())
+      .then((chefs) => {
+        // Select a random chef from the list
+        const randomChef = chefs[Math.floor(Math.random() * chefs.length)];
+  
+        // Submit the comment with the randomly selected chef_id
+        fetch("http://127.0.0.1:5555/comments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            comment_text: commentInput,
+            chef_id: randomChef.id,
+            recipe_id: id,
+          }),
+        })
+          .then((r) => r.json())
+          .catch((error) => {
+            console.error('POST error', error);
+          })
+          .then(() => {
+            setCommentInput("");
+          });
       })
-      .then(() => {
-        setCommentInput("");
+      .catch((error) => {
+        console.error('Error fetching chefs', error);
       });
   }
-
+  
   function handleShowComments() {
    
     setShowComments(!showComments);
