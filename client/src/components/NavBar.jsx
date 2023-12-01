@@ -127,6 +127,7 @@ function NavBar({ logout, isLoggedIn }) {
                 <li><NavLink to="/" className="nav-link">Home</NavLink></li>
                 <li><NavLink to="/recipes" className="nav-link">Recipes</NavLink></li>
                 <li><NavLink to="/profile/1" className="nav-link">Profile</NavLink></li>
+                <li><NavLink to="/create_recipe" className="nav-link">Create New Recipe</NavLink></li>
                 <li className="border-b"></li>
                 <li>
                    {!isLoggedIn ? <NavLink to="/login" className="nav-link">Login</NavLink> : <span onClick={logout}>Logout</span>}
