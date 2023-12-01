@@ -107,7 +107,12 @@ class Recipe(db.Model, SerializerMixin):
     @validates('image')
     def validates_image(self, key, new_image):
         if not new_image:
+
             raise ValueError('Recipe must have an image!')
+
+         
+
+
         return new_image 
 
     @validates('created_date')
@@ -185,7 +190,11 @@ class Chef(db.Model, SerializerMixin):
     def validates_last_name(self, key, new_last_name):
         if not new_last_name:
             raise ValueError('Chef must have a last name')
-        if len(new_last_name) >= 3:
+
+        
+
+        if (len(new_last_name)>0):
+
             return new_last_name
         raise ValueError('Last name should have more than 2 char')
 

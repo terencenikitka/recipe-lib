@@ -52,96 +52,102 @@ function Signup(){
     }
 
     return (
-        <div className="font-mono bg-gray-400 max-w-2xl">
+        <div className="container flex bg-base-100  font-sans-serif max-w-2xl  ">
             
-            <div className="container mx-auto bg-secondary text-primary w-md">
-                <div className="flex my-12 items-stretch">
+            <div className=" mx-auto bg-accent-content text-neutral-content max-w ">
+                <div className="my-12 mb-8">
                     
-                    <div className=" xl:w-3/4 lg:w-11/12 flex-1 justify-center items-stretch">
+                    <div className="  ">
 
-                        <div className="w-7/12 bg-white p-1 rounded-lg lg:rounded-l-none items-stretch">
-                            <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
-                            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={handleSubmit}>
-                                <div className="mb-4 md:flex md:justify-center">
-                                    <div className="mb-4 md:mr-2 md:mb-0">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="firstName">
-                                            First Name
+                        <div className="w-fill p-1 rounded-lg lg:rounded-l-none ">
+                            <div className="text-center bg-clip-text text-transparent bg-gradient-to-r from-secondary-content to-primary-content underline decoration-solid pb-4">
+                                <h1 id="signup-h1" className="pt-1 uppercase font-bodoni-moda font-extrabold  text-center text-transparent text-4xl max-w-none tracking-widest ">Create  an  Account</h1>
+                            </div>
+                            <form className="px-12 pt-6 pb-8 mb-4 rounded" onSubmit={handleSubmit}>
+                                
+                                <div className="mb-2 flex ">
+                                    <div className="mb-4">
+                                        <label className="mb-2 text-lg font-bold " for="firstName" > First Name
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-max px-3 py-2 mt-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="firstName"
                                             type="text"
-                                            placeholder="First Name" required onChange={(e) => setNewChefFirstName(e.target.value)}
+                                            placeholder="First Name" required value={newChefFirstName}
+                                            onChange={(e) => setNewChefFirstName(e.target.value)}
                                         />
+                                        
                                     </div>
-                                    <div className="md:ml-2">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="lastName">
+                                    <div className="">
+                                        <label className=" mb-2 mr-20 text-lg font-bold" for="lastName">
                                             Last Name
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className=" w-max px-3 py-2 mt-2 text-md italic leading-tight rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="lastName"
                                             type="text"
-                                            placeholder="Last Name" required onChange={(e) => setNewChefLastName(e.target.value)}
-                                        />
+                                            placeholder="Last Name" required value={newChefLastName} onChange={(e) => setNewChefLastName(e.target.value)}
+                                        />  
                                     </div>
+                                    
                                 </div>
                                 <div className="mb-4">
-                                    <label className="block mb-2 text-sm font-bold text-gray-700" for="email">
+                                    <label className="block mb-2 text-lg font-bold" for="email">
                                         Email
                                     </label>
                                     <input
-                                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                        className="w-max px-3 py-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                         id="email"
                                         type="email"
                                         placeholder="Email" required onChange={(e) => setNewChefEmail(e.target.value)}
                                     />
                                 </div>
-                                <div className="mb-4 md:flex md:justify-between">
-                                    <div className="mb-4 md:mr-2 md:mb-0">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="password" >Password
+                                
+                                <div className="mb-4 md:flex md:justify-stretch">
+                                    <div className="mb-4">
+                                        <label className="mb-2 text-lg font-bold " for="password" > Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-max px-3 py-2 mt-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
                                             type="password"
-                                            placeholder="******************" required value={newChefPassword}
+                                            placeholder="*****" required value={newChefPassword}
                                             onChange={(e) => setNewChefPassword(e.target.value)}
                                         />
                                         
                                     </div>
-                                    <div className="md:ml-2">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" for="c_password">
+                                    <div className="">
+                                        <label className=" mb-2 text-lg font-bold" for="c_password">
                                             Confirm Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className=" w-max px-3 py-2 mt-2 text-md italic leading-tight rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="c_password"
                                             type="password"
-                                            placeholder="******************" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
+                                            placeholder="*****" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                                         />
                                         
                                     </div>
                                     
                                 </div>
                                 <div className="flex">
-                                        {!passwordsMatch && <p className="w-2/3 h-full px-4 py-2 mb-3 text-xs text-center italic text-gray-light bg-error shadow-md rounded-md self-stretch ml-10">Password confirmation does not match!</p>}
+                                        {!passwordsMatch && <p className="w-2/3 h-full px-4 py-3 mb-3 mt-0 text-md text-center italic text-gray-light bg-error shadow-md rounded-md self-stretch ml-10">Password confirmation does not match!</p>}
                                 </div>
                                 <div>
-                                    <label className="block mb-4 text-sm font-bold text-gray-700 custom-file-upload" for="prof_pic">Upload a Profile Pic </label>
-                                    <div className="flex items-center flex-col gap-y-3">
-                                        <input className="file-input file-input-bordered file-input-info file-input-sm w-full max-w-xs text-sm" type="file" onChange={handlePhotoChange}></input>
+                                    <label className="block mb-3 mt-0 text-lg font-bold" for="prof_pic">Upload a Profile Picture </label>
+                                    <div className="">
+                                        <input className="w-max px-3 py-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text" placeholder="Picture URL" onChange={handlePhotoChange}></input>
                                         <img className="rounded-md drop-shadow-md" src={file} />
                                     </div>
-                                    <label className="block mb-4 text-sm font-bold text-gray-700 pt-7">
-                                        <span className="mb-1">About Me</span>
-                                        <textarea rows="3" className="block w-full rounded-md focus:ring focus:ri focus:ri dark:bg-gray-800 mt-3 text-sm" placeholder="Tell us a bit about yourself!" onChange={(e) => setNewChefBio(e.target.value)}></textarea>
-                                    </label>
+                                    <label className="block mb-3 text-lg font-bold pt-5">
+                                        About Me </label>
+                                        <textarea rows="3" className="w-full px-3 py-2 mb-4 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Tell us a bit about yourself!" onChange={(e) => setNewChefBio(e.target.value)}></textarea>
+                                    
                                     
                                 </div>
                                 <div className="mb-6 text-center">
                                     <button
-                                        className="btn-primary btn w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                        className="hover:btn-secondary bg-primary  btn max-w px-6 py-2 my-3 text-xl hover:text-primary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark"
                                         type="submit" disabled={!passwordsMatch}
                                     >
                                         Register Account
@@ -149,14 +155,15 @@ function Signup(){
                                 </div>
                                 <hr className="mb-6 border-t" />
                                 
-                                <div className="text-center">
-                                    <p>Already have an account?</p>
+                                <div className="text-center text-md mb-">
+                                    <p>Already have an account? 
                                     <a
-                                        className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800 mt-1.5 underline"
+                                        className="inline-block align-baseline hover:text-blue-800 mt-1.5 underline font-bold"
                                         onClick={() => navigate('/login')}
                                     >
                                         Login!
                                     </a>
+                                    </p>
                                 </div>
                             </form>
                         </div>
