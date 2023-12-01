@@ -79,7 +79,7 @@ function App() {
         )}
         
         
-        <div className="flex-1">
+        <div className="">
           <Outlet context={context}/>
           {(location.pathname === "/" ) && <Recipes />}
           

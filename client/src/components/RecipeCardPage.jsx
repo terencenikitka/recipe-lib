@@ -99,14 +99,14 @@ function RecipeCardPage({recipeData, chef_id}) {
   return (
     <>
       {recipe && (
-        <div className="mt-12 mb-6 ml-12 mr-18 w-screen shadow-xl rounded-xl">
-          <div className="w-fill rounded-xl">
+        <div className="container mt-16 mb-6 ml-12 mr-18 w-screen shadow-xl rounded-xl">
+          <div className="w-1/2 rounded-xl card">
             <figure className="flex mt-6">
               <img src={recipe.image} alt={recipe.name} className="h-64 w-64" />
             </figure>
             <div className="card-body w-fit h-fit ">
               <h1 className="card-title justify-center text-center font-sans">{recipe.name}</h1>
-              <p className="text-sm">Created by {recipe.chef_id} on {recipe.formattedDate}</p>
+              <p className="text-sm text-center">Created on {recipe.formattedDate}</p>
               <p className="text-base text-center font-mono">Difficulty: {recipe.difficulty}</p>
               <p className="text-base text-center font-mono">Cook Time: {recipe.cook_time} Minutes</p>
               <h1 className="card-title justify-center text-center font-sans">{recipe.instruction}</h1>
