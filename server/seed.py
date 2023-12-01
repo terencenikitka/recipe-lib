@@ -87,7 +87,8 @@ def create_comments():
         c = Comment(
             comment_text = fake.paragraph(nb_sentences=3),
             created_date=fake.date_this_year(),
-            chef_id = random.randint(1, 20)
+            chef_id = random.randint(1, 20),
+            recipe_id = random.randint(1, 80),
         )
     return comments
 

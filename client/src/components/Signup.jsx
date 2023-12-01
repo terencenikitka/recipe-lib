@@ -52,22 +52,22 @@ function Signup(){
     }
 
     return (
-        <div className="container flex bg-base-100  font-sans-serif max-w-2xl  ">
+        <div className="w-screen mt-16 mb-6 container bg-base-100  font-sans-serif   ">
             
-            <div className=" mx-auto bg-accent-content text-neutral-content max-w ">
-                <div className="my-12 mb-8">
+            <div className="mx-12 bg-accent-content text-neutral-content max-w ">
+                <div className="mb-8">
                     
                     <div className="  ">
 
                         <div className="w-fill p-1 rounded-lg lg:rounded-l-none ">
-                            <div className="text-center bg-clip-text text-transparent bg-gradient-to-r from-secondary-content to-primary-content underline decoration-solid pb-4">
-                                <h1 id="signup-h1" className="pt-1 uppercase font-bodoni-moda font-extrabold  text-center text-transparent text-4xl max-w-none tracking-widest ">Create  an  Account</h1>
+                            <div className="flex mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-secondary-content to-primary-content underline decoration-solid pb-4">
+                                <h1 id="signup-h1" className="mt-5 uppercase font-bodoni-moda font-extrabold  text-center text-transparent text-4xl w-full max-w-none tracking-widest ">Create  an  Account</h1>
                             </div>
-                            <form className="px-12 pt-6 pb-8 mb-4 rounded" onSubmit={handleSubmit}>
+                            <form className="px-12 pt-3 pb-8 mb-4 rounded" onSubmit={handleSubmit}>
                                 
-                                <div className="mb-2 flex ">
-                                    <div className="mb-4">
-                                        <label className="mb-2 text-lg font-bold " for="firstName" > First Name
+                                <div className="flex mb-8">
+                                    <div className="w-1/2 h-12">
+                                        <label className="block mb-2 text-lg font-bold " for="firstName" > First Name
                                         </label>
                                         <input
                                             className="w-max px-3 py-2 mt-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -78,8 +78,8 @@ function Signup(){
                                         />
                                         
                                     </div>
-                                    <div className="">
-                                        <label className=" mb-2 mr-20 text-lg font-bold" for="lastName">
+                                    <div className="w-1/2 h-12">
+                                        <label className="block mb-2 mr-20 text-lg font-bold" for="lastName">
                                             Last Name
                                         </label>
                                         <input
@@ -91,7 +91,8 @@ function Signup(){
                                     </div>
                                     
                                 </div>
-                                <div className="mb-4">
+                                <div className="flex mb-4">
+                                    <div className="w-full">
                                     <label className="block mb-2 text-lg font-bold" for="email">
                                         Email
                                     </label>
@@ -101,11 +102,12 @@ function Signup(){
                                         type="email"
                                         placeholder="Email" required onChange={(e) => setNewChefEmail(e.target.value)}
                                     />
+                                    </div>
                                 </div>
                                 
-                                <div className="mb-4 md:flex md:justify-stretch">
-                                    <div className="mb-4">
-                                        <label className="mb-2 text-lg font-bold " for="password" > Password
+                                <div className="mb-4 flex">
+                                    <div className="mb-4 w-1/2 h-12">
+                                        <label className="block mb-2 text-lg font-bold " for="password" > Password
                                         </label>
                                         <input
                                             className="w-max px-3 py-2 mt-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -116,8 +118,8 @@ function Signup(){
                                         />
                                         
                                     </div>
-                                    <div className="">
-                                        <label className=" mb-2 text-lg font-bold" for="c_password">
+                                    <div className="mb-4 w-1/2 h-12">
+                                        <label className="block mb-2 text-lg font-bold" for="c_password">
                                             Confirm Password
                                         </label>
                                         <input
@@ -133,17 +135,17 @@ function Signup(){
                                 <div className="flex">
                                         {!passwordsMatch && <p className="w-2/3 h-full px-4 py-3 mb-3 mt-0 text-md text-center italic text-gray-light bg-error shadow-md rounded-md self-stretch ml-10">Password confirmation does not match!</p>}
                                 </div>
-                                <div>
-                                    <label className="block mb-3 mt-0 text-lg font-bold" for="prof_pic">Upload a Profile Picture </label>
-                                    <div className="">
+                                <div className="flex mb-4">
+                                    <div className="w-full">
+                                        <label className="block mb-3 mt-0 text-lg font-bold" for="prof_pic">Upload a Profile Picture </label>
                                         <input className="w-max px-3 py-2 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text" placeholder="Picture URL" onChange={handlePhotoChange}></input>
-                                        <img className="rounded-md drop-shadow-md" src={file} />
                                     </div>
-                                    <label className="block mb-3 text-lg font-bold pt-5">
-                                        About Me </label>
-                                        <textarea rows="3" className="w-full px-3 py-2 mb-4 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Tell us a bit about yourself!" onChange={(e) => setNewChefBio(e.target.value)}></textarea>
-                                    
-                                    
+                                </div>
+                                <div className="flex mb-4">
+                                    <div className="w-full">
+                                    <label className="block mb-3 text-lg font-bold pt-5">About Me </label>
+                                    <textarea rows="3" className="w-full px-3 py-2 mb-4 text-md italic leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Tell us a bit about yourself!" onChange={(e) => setNewChefBio(e.target.value)}></textarea>
+                                    </div> 
                                 </div>
                                 <div className="mb-6 text-center">
                                     <button
