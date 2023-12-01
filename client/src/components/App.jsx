@@ -75,9 +75,9 @@ function App() {
       )}
       
       
-      <div className="flex-1">
+      <div className="">
         <Outlet context={context}/>
-        {(location.pathname === '/' || location.pathname === '/recipes') && <Recipes />}
+        {location.pathname === '/' && <Recipes />}
         
       </div>
     </div>

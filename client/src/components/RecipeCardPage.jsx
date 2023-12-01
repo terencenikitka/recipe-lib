@@ -87,10 +87,10 @@ function RecipeCardPage() {
   return (
     <>
       {recipe && (
-        <div className="card w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 bg-base-1/2 shadow-xl max-h-min rounded-xl">
-          <div className="justify-center rounded-xl">
-            <figure className="">
-              <img src={recipe.image} alt={recipe.name} className="max-h-min object-cover md:h-full w-fit" />
+        <div className="mt-12 mb-6 ml-12 mr-18 w-screen shadow-xl rounded-xl">
+          <div className="w-fill rounded-xl">
+            <figure className="flex mt-6">
+              <img src={recipe.image} alt={recipe.name} className="h-64 w-64" />
             </figure>
             <div className="card-body w-fit h-fit ">
               <h1 className="card-title justify-center text-center font-sans">{recipe.name}</h1>

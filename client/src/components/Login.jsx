@@ -22,8 +22,10 @@ function Login(){
     }
 
     return (
-        <div>
+        <div className="w-screen mt-16 mb-6 container bg-base-100">
+            <div className="flex ">
             <h1>Welcome back!</h1>
+            </div>
             <form onSubmit={handleLogin}>
                 <label for="email">Email</label>
                 <div>

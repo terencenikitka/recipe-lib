@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import RecipeCard from "./RecipeCard"
 
 function Recipes(){
