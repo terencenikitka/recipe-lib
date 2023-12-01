@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 
 
+import { Carousel } from 'flowbite-react';
+
+
 const Profile = () => {
     // const {chefs} = useOutletContext()
     // const {chefId} = useParams()
@@ -46,16 +49,7 @@ const Profile = () => {
 
     return (
         <main className="profile-page w-screen">
-        {/* <section className="relative block h-200-px"> */}
-            {/* <div className="relative top-20 w-full h-full bg-center bg-cover">
-            <span id="blackOverlay" className="w-full h-full absolute opacity-50 bg-black"></span>
-            </div> */}
-            {/* <div className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style={{ transform: 'translateZ(0px)' }}>
-            <svg className="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-                <polygon className="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-            </div> */}
-        {/* </section> */}
+        
         <section className="relative py-16 bg-base-200">
             <div className="container mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-secondary-300 w-full mb-6 shadow-xl rounded-lg mt-32">
@@ -99,8 +93,19 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="mt-6 py-10 border-t-2 border-primary text-center">
-                    <button className="btn btn-ghost txt-rose-950 border-primary">My Recipes</button>
+                    <h1 className="text-5xl font-bodoni-moda font-bold mb-4 pt-5 text-center text-primary-content">My Favorite Recipes</h1>
                 </div>
+                <div className="flex justify-center pb-12">
+                <div className="w-1/2 h-56 sm:h-64 xl:h-80 2xl:h-96">
+                    <Carousel>
+                        <img src="https://fitfoodiefinds.com/wp-content/uploads/2023/03/Sushi-Burrito-sq.jpg" alt="sushi" />
+                        <img src="https://www.thespruceeats.com/thmb/wiFS2z1vLTt3fHKDVaka5KiWshI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/basic-cherry-pie-recipe-995136-14-dfe79487adf64a848a49dd07983b6614.jpg" alt="pie" />
+                        <img src="https://image-tc.galaxy.tf/wijpeg-dkpe8fjn7i96wvpe4lsnrh7sz/crawfish-season-new-orleans_standard.jpg?crop=56%2C0%2C889%2C667" alt="crawfish" />
+                        <img src="https://assets.bonappetit.com/photos/5c2f8fe26558e92c8a622671/1:1/w_2700,h_2700,c_limit/bolognese-1.jpg" alt="bolognse" />
+                        <img src="https://www.inspiredtaste.net/wp-content/uploads/2016/06/Vietnamese-Pho-Soup-Recipe-1.jpg" alt="pho" />
+                    </Carousel>
+                    </div>
+                    </div>
                 </div>
             </div>
             </div>
