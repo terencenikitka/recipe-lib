@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Outlet, useNavigate, Navigate } from "react-router-dom";
+import { Switch, Route, Outlet, useNavigate, Navigate, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
-import Home from "./Home";
+import Recipes from "./Recipes";
 import "../index.css"
 
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogoutAlert, setShowLogoutAlert] = useState(false)
+  const [chefs, setChefs] = useState([])
   const navigate = useNavigate()
+  const location = useLocation()
 
   const login = () => {
     setIsLoggedIn(true)
@@ -23,12 +25,36 @@ function App() {
       navigate("/", {replace: true})
     }}, [isLoggedIn])
 
+    useEffect(() => {
+        fetch("http://127.0.0.1:5555/chefs")
+            .then( r => {
+                if (r.ok) {
+                    return r.json()
+                }
+                throw r
+            })
+            .then((chefsData) => {
+                setChefs(chefsData)
+                console.log('Chefs Data:', chefsData)
+            })
+            .catch((e) => {
+                console.error("Error fetching chefs:", e)
+            })
+    }, [])
+
+  console.log(chefs)
+
+  const context = {
+    chefs,
+    login
+  }
 
   return ( 
     <div className="bg-base-100 flex">
-      <header>
+      <header className="w-full h-10">
         <NavBar isLoggedIn={isLoggedIn} logout={logout} login={login} />  
       </header>
+      
       {showLogoutAlert && (
         <div role="alert" className={`alert alert-success custom-alert ${showLogoutAlert ? 'fadeout' : 'fadein'}`} onAnimationEnd={() => setShowLogoutAlert(false)} style={{display: showLogoutAlert ? 'block': 'none'}}>
           <svg
@@ -47,11 +73,13 @@ function App() {
           <span>You have been successfully logged out!</span>
         </div>
       )}
+      
+      
       <div className="flex-1">
-        <Outlet context={login}/>
+        <Outlet context={context}/>
+        {(location.pathname === '/' || location.pathname === '/recipes') && <Recipes />}
+        
       </div>
-      
-      
     </div>
     
 );
@@ -60,5 +88,3 @@ function App() {
 export default App;
 
 
-
-// w-max mx-auto alert-box transition-opacity duration-1000 ease-in-out opacity-100
