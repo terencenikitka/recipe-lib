@@ -30,7 +30,8 @@ def check_if_logged():
     open_access = [
         'login',
         'logout',
-        'check_session'
+        'check_session',
+        'recipes'
     ]
     if (request.endpoint) not in open_access and (not session.get('user_id')):
         return {'error':'User must be logged in'}, 401
@@ -136,7 +137,7 @@ class Recipes (Resource):
 
         return make_response(recipe.to_dict(rules=('chef', 'comments', 'recipe_ingredients', 'recipe_cuisines')), 201)                    
         
-api.add_resource(Recipes,'/recipes')        
+api.add_resource(Recipes,'/recipes',endpoint='recipes')        
 
 class RecipeById (Resource):
 
