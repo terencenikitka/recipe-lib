@@ -24,16 +24,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
 
-@app.before_request
-def check_if_logged():
-    #routes we want user to see without login defined by endpoints
-    open_access = [
-        'login',
-        'logout',
-        'check_session'
-    ]
-    if (request.endpoint) not in open_access and (not session.get('user_id')):
-        return {'error':'User must be logged in'}, 401
+# @app.before_request
+# def check_if_logged():
+#     #routes we want user to see without login defined by endpoints
+#     open_access = [
+#         'login',
+#         'logout',
+#         'check_session',
+
+#     ]
+#     if (request.endpoint) not in open_access and (not session.get('user_id')):
+#         return {'error':'User must be logged in'}, 401
 class Cuisines (Resource):
 
     def get(self):
