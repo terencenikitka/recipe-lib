@@ -7,7 +7,7 @@ function Recipes(){
     const [visibleRecipes, setVisibleRecipes] = useState(8)
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5555/recipes")
+        fetch("/recipes")
             .then( r => {
                 if (r.ok) {
                     return r.json()

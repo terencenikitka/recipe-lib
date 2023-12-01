@@ -26,9 +26,9 @@ def create_chefs():
             last_name = fake.last_name(),
             bio = fake.paragraph(nb_sentences=4),
             pic = "https://picsum.photos/200",
-            password = "12345",
             email = fake.unique.email()
         )
+        c.authenticate('12345')
         chefs.append(c)
     return chefs
 
