@@ -44,14 +44,14 @@ const sunIcon = (
 
 function NavBar({ logout, isLoggedIn }) {
     const navigate = useNavigate()
-    const [theme, setTheme] = useState('autumn')
+    const [theme, setTheme] = useState('myLight')
     
     const handleLoginClick = () => {
         navigate("/login")
     }
     
     const toggleTheme = () => {
-        setTheme(theme === 'business' ? 'autumn' : 'business')
+        setTheme(theme === 'myDark' ? 'myLight' : 'myDark')
     }
 
     useEffect(() => {

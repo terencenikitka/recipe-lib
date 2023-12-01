@@ -50,6 +50,15 @@
   border-width: 2px;
 }
 
+p a {
+  margin-left: 8px;
+  /* Adjust the value as needed */
+}
+
+#signup-h1 {
+  word-spacing: 8px;
+}
+
 /* .custom-file-upload input {
   display: none;
 }
