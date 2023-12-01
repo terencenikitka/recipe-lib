@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard"
-import { useEffect, useState } from "react";
-import RecipeCard from "./RecipeCard"
+
+
 
 function Recipes(){
     const [recipes, setRecipes] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-    const [visibleRecipes, setVisibleRecipes] = useState(8)
     const [visibleRecipes, setVisibleRecipes] = useState(8)
 
     useEffect(() => {
