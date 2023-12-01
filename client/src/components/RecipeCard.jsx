@@ -20,7 +20,7 @@ function RecipeCard(props){
    function handleViewMore(e){
         console.log(props.recipe.id)
         navigate(`/recipes/${props.recipe.id}`)
-        return <RecipeCardPage key={props.recipe.id} recipe={props.recipe} />
+        return <RecipeCardPage key={props.recipe.id} recipeData={props.recipe} chef_id={props.recipe.chef_id}/>
     }
 
     return (
