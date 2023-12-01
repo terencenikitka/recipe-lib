@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-function RecipeCardPage() {
+function RecipeCardPage({recipeData, chef_id}) {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [commentInput, setCommentInput] = useState("");
@@ -19,6 +19,14 @@ function RecipeCardPage() {
         throw new Error("Failed to fetch recipe");
       })
       .then((recipeData) => {
+        const formattedDate = new Date(recipeData.created_date)
+          .toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+        recipeData.formattedDate = formattedDate
+        console.log(recipeData)
         setRecipe(recipeData);
       })
       .catch((error) => {
@@ -86,6 +94,8 @@ function RecipeCardPage() {
     setShowComments(!showComments);
   }
 
+
+
   return (
     <>
       {recipe && (
@@ -96,6 +106,7 @@ function RecipeCardPage() {
             </figure>
             <div className="card-body w-fit h-fit ">
               <h1 className="card-title justify-center text-center font-sans">{recipe.name}</h1>
+              <p className="text-sm">Created by {recipe.chef_id} on {recipe.formattedDate}</p>
               <p className="text-base text-center font-mono">Difficulty: {recipe.difficulty}</p>
               <p className="text-base text-center font-mono">Cook Time: {recipe.cook_time} Minutes</p>
               <h1 className="card-title justify-center text-center font-sans">{recipe.instruction}</h1>
