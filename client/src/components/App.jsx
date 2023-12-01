@@ -51,7 +51,7 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-    })
+    },[])
     
     return ( 
       <div className="bg-base-100 flex">
