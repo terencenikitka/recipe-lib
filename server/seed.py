@@ -31,7 +31,7 @@ if __name__ == '__main__':
         db.session.commit()
         
         #adding Recipes
-        r1 = Recipe(name="Peanut Butter and Jelly Sandwich", image="https://t.ly/JFSIc.png",
+        r1 = Recipe(name="Peanut Butter and Jelly Sandwich", image="https://t.ly/JFSIc",
                 created_date=datetime.now(), difficulty="Easy", cook_time=10, instruction="1. On one slice of bread, spread peanut butter evenly over the bread.\n2. On the other slice of bread, spread the jelly evenly over the bread.\n3. Put the two slices of bread together with the peanut butter and jelly facing in.\n4. Serve and enjoy!\n5. Optional: Remove crusts, cut diagonally", chef_id=3)
         r2 = Recipe(name="Macaroni and Cheese", 
                 image="https://joyfoodsunshine.com/wp-content/uploads/2019/04/easy-homemade-mac-and-cheese-recipe-1x1-1.jpg", 
