@@ -3,7 +3,7 @@
 # Standard library imports
 import os
 # Remote library imports
-from flask import request, make_response, jsonify
+from flask import request, make_response, jsonify, session
 from flask_restful import Resource
 from datetime import datetime
 
@@ -25,7 +25,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
 
-
+# @app.before_request
+# def check_if_logged():
+#     #routes we want user to see without login defined by endpoints
+#     open_access = [
+#         'login',
+#         'logout',
+#         'check_session'
+#     ]
+#     if (request.endpoint) not in open_access and (not session.get('user_id')):
+#         return {'error':'User must be logged in'}, 401
 class Cuisines (Resource):
 
     def get(self):
@@ -251,8 +260,28 @@ class CommentById (Resource):
         return make_response('',204)                   
 
 api.add_resource(CommentById,'/comments/<id>')   
+class Login(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        user = Chef.query.filter(Chef.name == username).first()
+        session['user_id'] = user.id
+        return user.to_dict(),200
 
+class Logout(Resource):
+    def delete(self):
+        session['user.id'] = None
+        return {},204
 
+class CheckSession(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+        if user_id:
+            user = Chef.query.filter(Chef.id == user_id).first()
+            return user.to_dict(),200
+
+api.add_resource(Login,'/login', endpoint='login')
+api.add_resource(Logout,'/logout', endpoint='logout')
+api.add_resource(CheckSession,'/check_session', endpoint='check_session')
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
