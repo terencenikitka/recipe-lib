@@ -1,5 +1,25 @@
 # Phase 4 Full-Stack Application Project Template
+## UseFul Commands:
+pipenv install
+pipenv shell
+pipenv install faker-food
+pipenv install bcrypt
+pipenv install flask-bcrypt
 
+npm install --prefix client
+$cd client-> npm install @tailwindcss/forms
+cd server
+export FLASK_APP=server/app.py
+export FLASK_APP=app.py
+flask db upgrade head
+python seed.py
+python app.py
+
+
+npm start --prefix client
+
+
+?npm install react-dropdown-select
 ## Learning Goals
 
 - Discuss the basic directory structure of a full-stack Flask/React application.
