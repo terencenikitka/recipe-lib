@@ -24,20 +24,22 @@ function RecipeCard(props){
     }
 
     return (
-        <div className="card w-20 md:w-40 lg:w-60 xl:w-80 bg-base-100 shadow-xl max-h-min rounded-xl">
-            <div className="justify-center rounded-xl" >
-                <figure className="">
-                    <img src={image} alt={name} className="max-h-min object-cover md:h-full w-fit" />
+        <div className="card-container">
+        <div className="card w-72 h-auto bg-secondary shadow-xl rounded-xl">
+            <div className="rounded-xl" >
+                <figure className="w-fill h-fill">
+                    <img src={image} alt={name} className="w-full h-max object-cover rounded-t-xl" />
                 </figure>
-                <div className="card-body w-fit h-fit ">
-                    <h1 className="card-title justify-center text-center font-sans">{name}</h1>
-                    <p className=" text-base text-center font-mono">Difficulty: {difficulty}</p>
-                    <p className=" text-base text-center font-mono">Cook Time: {cook_time} Minutes</p>
-                    <div className="card-actions justify-center">
-                        <button className="btn btn-secondary" onClick={handleViewMore}>View More</button>
+                <div className="card-body p-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                    <h1 className="card-title font-sans text-scale-vw">{name}</h1>
+                    <p className=" text-base font-mono text-scale-vw">Difficulty: {difficulty}</p>
+                    <p className=" text-base font-mono text-scale overflow-hidden max-h-20">Cook Time: {cook_time} Minutes</p>
+                    <div className="card-actions">
+                        <button className="btn text-accent-content btn-primary" onClick={handleViewMore}>View More</button>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

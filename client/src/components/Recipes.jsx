@@ -28,13 +28,13 @@ function Recipes(){
     }
 
     return (
-        <div className="container">
-            <div className="recipe-container columns-3">
+
+            <div className="w-screen recipe-container container grid grid-cols-4 grid-rows-2 gap-4 mt-16">
                 {recipes.slice(0, visibleRecipes).map(recipe => (
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 ))}
             </div>
-        </div>
+
     )
 }
 
