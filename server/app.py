@@ -86,13 +86,47 @@ class Recipes (Resource):
 
     def post(self):
         params = request.json
+        print("Received JSON data:", params)
+
         try:
-            recipe = Recipe(name = params['name'],image = params['image'],created_date = params['created_date'],difficulty = params['difficulty'],cook_time=params['cook_time'],instruction=params['instruction'])
-        except:
-            return make_response({'error':['something wrong,ask Nikita']},422)
+            created_date = datetime.utcnow()
+
+            # Make sure to parse parameters correctly
+            recipe = Recipe(
+                name=params['name'],
+                image=params['image'],
+                created_date=created_date,
+                difficulty=params['difficulty'],
+                cook_time=params['cook_time'],
+                instruction=params['instruction'],
+                chef_id=params['chef_id']
+            )
+
+            # Assuming 'ingredients' is a list of ingredient IDs
+            ingredient_ids = params.get('ingredients', [])
+            recipe.recipe_ingredients = [RecipeIngredient(ingredient_id=ingredient_id) for ingredient_id in ingredient_ids]
+
+            # Assuming 'cuisines' is a list of cuisine IDs
+            cuisine_ids = params.get('cuisine', [])
+            recipe.recipe_cuisines = [RecipeCuisine(cuisine_id=cuisine_id) for cuisine_id in cuisine_ids]
+
+        except Exception as e:
+            return make_response({'error': str(e)}, 422)
+
         db.session.add(recipe)
         db.session.commit()
-        return make_response(recipe.to_dict(rules = ('-chef','-comments','-recipe_ingredients','-recipe_cuisines')),201)                    
+
+        return make_response(recipe.to_dict(rules=('chef', 'comments', 'recipe_ingredients', 'recipe_cuisines')), 201)
+
+
+
+
+
+        db.session.add(recipe)
+        db.session.commit()
+
+
+        return make_response(recipe.to_dict(rules=('chef', 'comments', 'recipe_ingredients', 'recipe_cuisines')), 201)                    
         
 api.add_resource(Recipes,'/recipes')        
 

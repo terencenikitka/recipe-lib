@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
-import RecipeCard from "./RecipeCard"
+import React, { useEffect, useState } from "react";
+import RecipeCard from "./RecipeCard";
 
 function Recipes(){
     const [recipes, setRecipes] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-    const [visibleRecipes, setVisibleRecipes] = useState(8)
 
-    useEffect(() => {
-        fetch("http://127.0.0.1:5555/recipes")
-            .then( r => {
-                if (r.ok) {
-                    return r.json()
-                }
-                throw r
-            })
-            .then((recipes) => {
-                setRecipes(recipes)
-                console.log(recipes)
-            })
-            .catch((e) => {
-                console.error("Error fetching recipes:", e)
-            })
-    }, [])
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5555/recipes")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      })
+      .then((recipes) => {
+        setRecipes(recipes);
+        console.log("Recipes:", recipes);
+      })
+      .catch((error) => {
+        console.error("Error fetching recipes:", error);
+      });
+  }, []);
+
 
     const loadMore = () => {
         setVisibleRecipes(visibleRecipes + 8);
@@ -47,6 +48,6 @@ function Recipes(){
             </div>
         </div>
     )
-}
+
 
 export default Recipes;

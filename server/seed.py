@@ -105,6 +105,10 @@ if __name__ == '__main__':
         Ingredient.query.delete()
         Cuisine.query.delete()
         
+
+        
+
+    
         print("Seeding chefs...")
         chefs = create_chefs()
         db.session.add_all(chefs)
