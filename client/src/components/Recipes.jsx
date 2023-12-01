@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard"
 
+
+
 function Recipes(){
     const [recipes, setRecipes] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [visibleRecipes, setVisibleRecipes] = useState(8)
 
     useEffect(() => {
-        fetch("/recipes")
+        fetch("http://127.0.0.1:5555/recipes")
             .then( r => {
                 if (r.ok) {
                     return r.json()
