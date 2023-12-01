@@ -58,7 +58,8 @@ def create_recipes():
             created_date = fake.date_this_year(),
             difficulty = select_difficulty(),
             cook_time = generate_time(10,180),
-            instruction = fake.dish_description()
+            instruction = fake.dish_description(),
+            chef_id = random.randint(1, 20)
         )
         recipes.append(r)
     return recipes
@@ -90,6 +91,7 @@ def create_comments():
             chef_id = random.randint(1, 20),
             recipe_id = random.randint(1, 80),
         )
+        comments.append(c)
     return comments
 
 
