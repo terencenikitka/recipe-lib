@@ -7,6 +7,7 @@ import "../index.css"
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const [showLogoutAlert, setShowLogoutAlert] = useState(false)
   const navigate = useNavigate()
 
@@ -17,8 +18,16 @@ function App() {
     setIsLoggedIn(false)
     setShowLogoutAlert(true)
   }
-
+  const context = {
+    login,
+    setUser
+  }
   useEffect(() => {
+    fetch("/check_session").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
     if (isLoggedIn) {
       navigate("/", {replace: true})
     }}, [isLoggedIn])
@@ -48,7 +57,7 @@ function App() {
         </div>
       )}
       <div className="flex-1">
-        <Outlet context={login}/>
+        <Outlet context={context}/>
       </div>
       
       

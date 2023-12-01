@@ -2,6 +2,7 @@
 
 # Remote library imports
 from flask import Flask, session
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
@@ -25,6 +26,7 @@ db = SQLAlchemy(metadata=metadata)
 migrate = Migrate(app, db, render_as_batch=True)
 db.init_app(app)
 
+bcrypt = Bcrypt(app)
 # Instantiate REST API
 api = Api(app)
 

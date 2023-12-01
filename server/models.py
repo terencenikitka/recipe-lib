@@ -1,8 +1,9 @@
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
 
-from config import db, SQLAlchemy, MetaData
+from config import db, SQLAlchemy, MetaData, bcrypt
 
 class Cuisine(db.Model, SerializerMixin):
     __tablename__ = 'cuisines'
@@ -130,13 +131,14 @@ class Chef(db.Model, SerializerMixin):
     last_name = db.Column(db.String)
     bio = db.Column(db.String)
     pic = db.Column(db.String)
-    password = db.Column(db.Integer, nullable = False)
+    _password_hash = db.Column(db.String)
     email = db.Column(db.String)
 
 
     # comments = db.relationship('Comment', back_populates='chef')
     recipes = db.relationship('Recipe', back_populates='chef')
-
+    #currently no rules and causeing recurssion -/login
+    serialize_rules = ('-recipes',)
     @validates('first_name')
     def validates_first_name(self,key,new_first_name):
         if not new_first_name:
@@ -176,7 +178,21 @@ class Chef(db.Model, SerializerMixin):
             raise ValueError('Email address already exists in the database!')
 
         return new_email
-        
+    
+    @hybrid_property
+    def password_hash(self):
+        raise Exception('No you should not see this')
+
+    @password_hash.setter
+    def password_hash(self,password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+    
+    def authenticate(self,password):
+        self.password_hash = password
+        return bcrypt.check_password_hash(self._password_hash,password.encode('utf-8'))
+
+
 
 
 class Comment(db.Model, SerializerMixin):

@@ -8,9 +8,8 @@ from flask_restful import Resource
 from datetime import datetime
 
 
-
 # Local imports
-from config import app, db, api
+from config import app, db, api, bcrypt
 
 from models import Cuisine,Ingredient,RecipeCuisine,RecipeIngredient,Recipe,Chef,Comment
 
@@ -25,16 +24,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
 
-# @app.before_request
-# def check_if_logged():
-#     #routes we want user to see without login defined by endpoints
-#     open_access = [
-#         'login',
-#         'logout',
-#         'check_session'
-#     ]
-#     if (request.endpoint) not in open_access and (not session.get('user_id')):
-#         return {'error':'User must be logged in'}, 401
+@app.before_request
+def check_if_logged():
+    #routes we want user to see without login defined by endpoints
+    open_access = [
+        'login',
+        'logout',
+        'check_session'
+    ]
+    if (request.endpoint) not in open_access and (not session.get('user_id')):
+        return {'error':'User must be logged in'}, 401
 class Cuisines (Resource):
 
     def get(self):
@@ -145,13 +144,16 @@ class Chefs (Resource):
         return make_response(chefs_data, 200)
 
     def post (self):
-        params = request.json
+        params = request.json()
+        password = request.get_json()['password']
         try:
-            chef = Chef(first_name=params['first_name'],bio=params['bio'],pic=params['pic'],password=params['password'],last_name=params['last_name'],email=params['email'])
+            chef = Chef(first_name=params['first_name'],bio=params['bio'],pic=params['pic'],last_name=params['last_name'],email=params['email'])
+            chef.password_hash = password
         except:
             return make_response({'error':['something wrong ask NIkita']},422)
         db.session.add(chef)
         db.session.commit()
+        session['user_id'] = chef.id
         return make_response(chef.to_dict(rules=('-comments', '-recipes')),201)           
 
 api.add_resource(Chefs,'/chefs')
@@ -262,10 +264,14 @@ class CommentById (Resource):
 api.add_resource(CommentById,'/comments/<id>')   
 class Login(Resource):
     def post(self):
-        username = request.get_json()['username']
-        user = Chef.query.filter(Chef.name == username).first()
-        session['user_id'] = user.id
-        return user.to_dict(),200
+        email = request.get_json()['email']
+        password = request.get_json()['password']
+        chef = Chef.query.filter(Chef.email == email).first()
+        if chef.authenticate(password):
+            session['user_id'] = chef.id
+            return make_response(chef.to_dict(),200)
+        return {'error':'401 Invalid email and password'}, 401
+        
 
 class Logout(Resource):
     def delete(self):
@@ -278,6 +284,7 @@ class CheckSession(Resource):
         if user_id:
             user = Chef.query.filter(Chef.id == user_id).first()
             return user.to_dict(),200
+        return 'Not Logged In'
 
 api.add_resource(Login,'/login', endpoint='login')
 api.add_resource(Logout,'/logout', endpoint='logout')

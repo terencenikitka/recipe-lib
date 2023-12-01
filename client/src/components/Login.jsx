@@ -3,7 +3,7 @@ import { useOutletContext,useNavigate } from "react-router-dom";
 
 function Login(){
     const navigate = useNavigate()
-    const login = useOutletContext()
+    const {login,setUser} = useOutletContext()
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -17,7 +17,18 @@ function Login(){
     }
 
     function handleLogin(e) {
-        e.preventDefault()
+        e.preventDefault();
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+            }).then((r) => {
+            if (r.ok) {
+                r.json().then((user) => setUser(user));
+            }
+        });
         login()
     }
 
@@ -64,7 +75,7 @@ function Login(){
                                         <button className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800 mt-1.5 underline" onClick={() => navigate('/login')/*navigate to /forgot-password*/}>Forgot your password?</button>
                                     </div>
                                     <div class="relative">
-                                        <button type="submit" class="btn-primary btn w-full px-4 py-2 font-bold text-white bg-blue-400 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" onClick={() => navigate('/profile')}>Sign In</button>
+                                        <button type="submit" class="btn-primary btn w-full px-4 py-2 font-bold text-white bg-blue-400 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Sign In</button>
                                         <hr className="mb-6 border-t" />
 
                                         <div className="text-center">
