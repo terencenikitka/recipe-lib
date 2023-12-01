@@ -6,8 +6,8 @@ import Profile from "./components/Profile";
 import Recipes from "./components/Recipes";
 import Search from "./components/Search";
 import Signup from "./components/Signup";
-
-
+import RecipeCardPage from "./components/RecipeCardPage";
+import CreateRecipe from "./components/CreateRecipe";
 const routes = [
     {
         path: "/",
@@ -37,6 +37,14 @@ const routes = [
             {
                 path: "/signup",
                 element: <Signup />
+            },
+            {
+                path:`/recipes/:id`,
+                element: <RecipeCardPage />
+            },
+            { 
+                path:'/create_recipe',
+                element:<CreateRecipe/>
             }
         ]
     }

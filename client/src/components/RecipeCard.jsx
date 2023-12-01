@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+import RecipeCardPage from "./RecipeCardPage";
 
 function RecipeCard(props){
     const {cook_time, created_date, difficulty, image, instruction, name} = props.recipe
-
+    const navigate = useNavigate()
     const [formattedDate, setFormattedDate] = useState("")
 
     useEffect(() => {
@@ -15,6 +17,12 @@ function RecipeCard(props){
         setFormattedDate(formattedDateStr)
     }, [created_date])
 
+   function handleViewMore(e){
+        console.log(props.recipe.id)
+        navigate(`/recipes/${props.recipe.id}`)
+        return <RecipeCardPage key={props.recipe.id} recipe={props.recipe} />
+    }
+
     return (
         <div className="card w-20 md:w-40 lg:w-60 xl:w-80 bg-base-100 shadow-xl max-h-min rounded-xl">
             <div className="justify-center rounded-xl" >
@@ -26,7 +34,7 @@ function RecipeCard(props){
                     <p className=" text-base text-center font-mono">Difficulty: {difficulty}</p>
                     <p className=" text-base text-center font-mono">Cook Time: {cook_time} Minutes</p>
                     <div className="card-actions justify-center">
-                        <button className="btn btn-secondary">View More</button>
+                        <button className="btn btn-secondary" onClick={handleViewMore}>View More</button>
                     </div>
                 </div>
             </div>
