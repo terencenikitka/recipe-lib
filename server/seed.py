@@ -26,9 +26,9 @@ def create_chefs():
             last_name = fake.last_name(),
             bio = fake.paragraph(nb_sentences=4),
             pic = "https://picsum.photos/200",
-            password = "12345",
             email = fake.unique.email()
         )
+        c.authenticate('12345')
         chefs.append(c)
     return chefs
 
@@ -87,7 +87,8 @@ def create_comments():
         c = Comment(
             comment_text = fake.paragraph(nb_sentences=3),
             created_date=fake.date_this_year(),
-            chef_id = random.randint(1, 20)
+            chef_id = random.randint(1, 20),
+            recipe_id = random.randint(1, 80),
         )
     return comments
 

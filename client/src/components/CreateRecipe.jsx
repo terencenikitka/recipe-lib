@@ -148,6 +148,7 @@ function CreateRecipe() {
   };
 
   return (
+
     <div className="bg-gray-light p-8 rounded-lg shadow-md max-w-md mx-auto mt-16 w-96">
       <h1 className="text-2xl font-bold mb-4">Create a New Recipe</h1>
       <form onSubmit={handleSubmit}>
@@ -163,55 +164,78 @@ function CreateRecipe() {
           />
         </label>
 
-        <label className="block mb-4">
-          <span className="text-gray-dark">Image (Base64):</span>
+ 
+
+            <label className="block mb-4">
+              <span className="text-gray-dark">Image (Base64):</span>
+              <input
+                type="text"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                className="form-input mt-1 block w-full"
+                required
+              />
+            </label>
+
+            <label className="block mb-4">
+              <span className="text-gray-dark">Cook Time (in minutes):</span>
+              <input
+                type="number"
+                name="cook_time"
+                value={formData.cook_time}
+                onChange={handleChange}
+                className="form-input mt-1 block w-full"
+                required
+              />
+            </label>
+
+            <label className="block mb-4">
+              <span className="text-gray-dark">Difficulty:</span>
+              <select
+                name="difficulty"
+                value={formData.difficulty}
+                onChange={handleChange}
+                className="form-select mt-1 block w-full"
+                required
+              >
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </label>
+
+            <label className="block mb-4">
+              <span className="text-gray-dark">Instruction:</span>
+              <textarea
+                name="instruction"
+                value={formData.instruction}
+                onChange={handleChange}
+                className="form-input mt-1 block w-full"
+                required
+              />
+            </label>
+
+            <label className="block mb-4">
+              <span className="text-gray-dark">Ingredients:</span>
+              <div className="flex flex-wrap">
+    {formData.ingredients &&
+      formData.ingredients.map((ingredient, index) => (
+        <label key={index} className="mr-4 mb-2">
           <input
-            type="text"
-            name="image"
-            value={formData.image}
+            type="checkbox"
+            name="ingredients"
+            value={ingredient.id}
             onChange={handleChange}
-            className="form-input mt-1 block w-full"
-            required
+            className="mr-2"
+            checked={formData.ingredient.includes(ingredient.id)}
           />
+          {getIngredientNameById(ingredient.id)}
         </label>
+      ))}
+              </div>
+            </label>
 
-        <label className="block mb-4">
-          <span className="text-gray-dark">Cook Time (in minutes):</span>
-          <input
-            type="number"
-            name="cook_time"
-            value={formData.cook_time}
-            onChange={handleChange}
-            className="form-input mt-1 block w-full"
-            required
-          />
-        </label>
-
-        <label className="block mb-4">
-          <span className="text-gray-dark">Difficulty:</span>
-          <select
-            name="difficulty"
-            value={formData.difficulty}
-            onChange={handleChange}
-            className="form-select mt-1 block w-full"
-            required
-          >
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
-        </label>
-
-        <label className="block mb-4">
-          <span className="text-gray-dark">Instruction:</span>
-          <textarea
-            name="instruction"
-            value={formData.instruction}
-            onChange={handleChange}
-            className="form-input mt-1 block w-full"
-            required
-          />
-        </label>
 
         <label className="block mb-4">
           <span className="text-gray-dark">Ingredients:</span>
@@ -245,14 +269,17 @@ function CreateRecipe() {
           </select>
         </label>
 
-        <button
-          type="submit"
-          className="bg-orange text-white py-2 px-4 rounded-full hover:bg-purple focus:outline-none focus:shadow-outline-orange"
-        >
-          Create Recipe
-        </button>
-      </form>
-    </div>
+
+
+            <button
+              type="submit"
+              className="bg-orange text-white py-2 px-4 rounded-full hover:bg-purple focus:outline-none focus:shadow-outline-orange"
+            >
+              Create Recipe
+            </button>
+          </form>
+        </div>
+        </div>
   );
 }
 

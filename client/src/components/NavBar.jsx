@@ -36,65 +36,20 @@ const sunIcon = (
     </svg>
 );
 
-// function NavBar({ logout, isLoggedIn }) {
-//     const navigate = useNavigate()
-//     const [theme, setTheme] = useState('myLight')
-    
-//     const handleLoginClick = () => {
-//         navigate("/login")
-//     }
-    
-//     const toggleTheme = () => {
-//         setTheme(theme === 'myDark' ? 'myLight' : 'myDark')
-//     }
-
-//     useEffect(() => {
-//         document.querySelector('html').setAttribute('data-theme', theme);
-//         }, [theme])
-
-//     const getIcon = () => {
-//         return theme === "mytheme" ? (
-//             <div onClick={toggleTheme}>{sunIcon}</div>
-//         ) : (
-//             <div onClick={toggleTheme}>{moonIcon}</div>
-//         );
-//     };
-
-//     return (
-//         <nav>
-//             <NavLink to="/" className="nav-link">
-//                 Home
-//             </NavLink>
-            
-            
-
-            <NavLink to="/signup" className="nav-link">
-                Signup
-            </NavLink>
-            
-
-//         </nav>
-        
-//     )
-// }
-
-
-{/* <div className="">
-    <div className="form-control w-24">
-        <label className="label cursor-pointer">{getIcon()}</label>
-    </div>
-</div> */}
-
-// THIS IS THE NAVBAR AND HEADER
-//         |
-//         |
-//         V
-
-
 function NavBar({ logout, isLoggedIn }) {
 
     const navigate = useNavigate()
     const [theme, setTheme] = useState('myLight')
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen)
+    }
+
+    const closeDropdown = () => {
+        setIsDropdownOpen(prevState => !prevState)
+    }
     
     const handleLoginClick = () => {
         navigate("/login")
@@ -119,22 +74,26 @@ function NavBar({ logout, isLoggedIn }) {
     return(
         <div className="navbar bg-base-100 fixed z-50">
         <div className="navbar-start">
-            <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+            <div className="relative">
+            <div className="dropdown" tabIndex={0}>
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={toggleDropdown}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
             </div>
+            {isDropdownOpen && (
             <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li><NavLink to="/" className="nav-link">Home</NavLink></li>
                 <li><NavLink to="/recipes" className="nav-link">Recipes</NavLink></li>
                 <li><NavLink to="/profile/1" className="nav-link">Profile</NavLink></li>
-                <li><NavLink to="/create_recipe" className="nav-link">Create New Recipe</NavLink></li>
+                
                 <li className="border-b"></li>
                 <li>
                    {!isLoggedIn ? <NavLink to="/login" className="nav-link">Login</NavLink> : <span onClick={logout}>Logout</span>}
                 </li>
                 <li><NavLink to="/signup" className="nav-link">Signup</NavLink></li>
-                <li><a>Settings</a></li>
+                <li><NavLink to="/create_recipe" className="nav-link">Create New Recipe</NavLink></li>
             </ul>
+            )}
+            </div>
             </div>
         </div>
         <div className="navbar-center">

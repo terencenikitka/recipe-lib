@@ -45,7 +45,7 @@ const Profile = () => {
     }
 
     return (
-        <main className="profile-page">
+        <main className="profile-page w-screen">
         {/* <section className="relative block h-200-px"> */}
             {/* <div className="relative top-20 w-full h-full bg-center bg-cover">
             <span id="blackOverlay" className="w-full h-full absolute opacity-50 bg-black"></span>
