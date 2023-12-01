@@ -215,28 +215,6 @@ function CreateRecipe() {
                 required
               />
             </label>
-
-            <label className="block mb-4">
-              <span className="text-gray-dark">Ingredients:</span>
-              <div className="flex flex-wrap">
-    {formData.ingredients &&
-      formData.ingredients.map((ingredient, index) => (
-        <label key={index} className="mr-4 mb-2">
-          <input
-            type="checkbox"
-            name="ingredients"
-            value={ingredient.id}
-            onChange={handleChange}
-            className="mr-2"
-            checked={formData.ingredient.includes(ingredient.id)}
-          />
-          {getIngredientNameById(ingredient.id)}
-        </label>
-      ))}
-              </div>
-            </label>
-
-
         <label className="block mb-4">
           <span className="text-gray-dark">Ingredients:</span>
           <Select
@@ -279,7 +257,7 @@ function CreateRecipe() {
             </button>
           </form>
         </div>
-        </div>
+       
   );
 }
 
