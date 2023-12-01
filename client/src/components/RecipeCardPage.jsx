@@ -99,35 +99,42 @@ function RecipeCardPage({recipeData, chef_id}) {
   return (
     <>
       {recipe && (
-        <div className="container mt-16 mb-6 ml-12 mr-18 w-screen shadow-xl rounded-xl">
+        <div className="flex align-center justify-center mt-16 mb-6  w-screen rounded-xl">
           <div className="w-1/2 rounded-xl card">
-            <figure className="flex mt-6">
+            <figure className="mt-6">
               <img src={recipe.image} alt={recipe.name} className="h-64 w-64" />
             </figure>
-            <div className="card-body w-fit h-fit ">
-              <h1 className="card-title justify-center text-center font-sans">{recipe.name}</h1>
-              <p className="text-sm text-center">Created on {recipe.formattedDate}</p>
+            <div className="card-body ">
+              <h1 className="text-3xl font-bodoni-moda justify-center text-center">{recipe.name}</h1>
+              <p className="text-sm text-center font-mono">Created on {recipe.formattedDate}</p>
               <p className="text-base text-center font-mono">Difficulty: {recipe.difficulty}</p>
-              <p className="text-base text-center font-mono">Cook Time: {recipe.cook_time} Minutes</p>
-              <h1 className="card-title justify-center text-center font-sans">{recipe.instruction}</h1>
-              <div className="card-actions justify-center">
-                <div className="mb-4">
-                  <label className="text-sm text-gray-600">Add a Comment:</label>
+              <p className="text-base text-center font-mono border-b">Cook Time: {recipe.cook_time} Minutes</p>
+              <p className="text-base justify-center text-center font-mono mb-5 mt-2">{recipe.instruction}</p>
+              <div className="">
+               <div className="flex mb-8">
+                <div className="mb-4 w-1/2 mx-12">
+                  
                   <textarea
-                    className="border p-2 w-full"
+                    className="border p-2 w-full text-xs font-mono" 
+                    placeholder="Add a Comment"
                     value={commentInput}
                     onChange={(e) => setCommentInput(e.target.value)}
                   />
                 </div>
-                <button className="btn btn-primary" onClick={handleCommentSubmit}>
+                <div className="mb-4 w-1/2 ">
+                <button className="btn btn-primary max-w" onClick={handleCommentSubmit}>
                   Add Comment
                 </button>
-                <button className="btn btn-secondary" onClick={handleBack}>
+                </div>
+                </div>
+                <div className="flex mb-6 ">
+                <button className="hover:btn-secondary bg-primary  btn max-w px-6 py-2 my-3 text-xl hover:text-primary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark mx-12" onClick={handleBack}>
                   Go back
                 </button>
-                <button className="btn btn-secondary" onClick={handleShowComments}>
+                <button className="hover:btn-secondary bg-primary  btn max-w px-6 py-2 my-3 text-xl hover:text-primary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark" onClick={handleShowComments}>
                   {showComments ? "Hide Comments" : "Show Comments"}
                 </button>
+                </div>
               </div>
                     {showComments && (
                       <div>
