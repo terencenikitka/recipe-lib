@@ -99,12 +99,12 @@ function RecipeCardPage({recipeData, chef_id}) {
   return (
     <>
       {recipe && (
-        <div className="flex align-center justify-center mt-16 mb-6  w-screen rounded-xl">
-          <div className="w-1/2 rounded-xl card">
+        <div className="flex align-center justify-center mt-16 mb-6  w-screen rounded-xl ">
+          <div className="w-1/2 rounded-xl card bg-neutral glass">
             <figure className="mt-6">
-              <img src={recipe.image} alt={recipe.name} className="h-64 w-64" />
+              <img src={recipe.image} alt={recipe.name} className="h-64 w-64 rounded-md" />
             </figure>
-            <div className="card-body ">
+            <div className="card-body text-primary-content">
               <h1 className="text-3xl font-bodoni-moda justify-center text-center">{recipe.name}</h1>
               <p className="text-sm text-center font-mono">Created on {recipe.formattedDate}</p>
               <p className="text-base text-center font-mono">Difficulty: {recipe.difficulty}</p>
@@ -128,10 +128,10 @@ function RecipeCardPage({recipeData, chef_id}) {
                 </div>
                 </div>
                 <div className="flex mb-6 ">
-                <button className="hover:btn-secondary bg-primary  btn max-w px-6 py-2 my-3 text-xl hover:text-primary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark mx-12" onClick={handleBack}>
+                <button className="hover:btn-neutral bg-accent  btn max-w px-6 py-2 my-3 text-xl hover:text-secondary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark mx-12" onClick={handleBack}>
                   Go back
                 </button>
-                <button className="hover:btn-secondary bg-primary  btn max-w px-6 py-2 my-3 text-xl hover:text-primary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark" onClick={handleShowComments}>
+                <button className="hover:btn-neutral bg-accent  btn max-w px-6 py-2 my-3 text-xl hover:text-secondary-content text-secondary-content  rounded-md border-none font-poppins font-bold shadow-md shadow-gray-dark" onClick={handleShowComments}>
                   {showComments ? "Hide Comments" : "Show Comments"}
                 </button>
                 </div>
