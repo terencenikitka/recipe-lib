@@ -149,7 +149,7 @@ const handleSubmit = (e) => {
   };
 
   return (
-    <div className="bg-gray-light p-8 rounded-lg shadow-md max-w-md mx-auto">
+<div class="bg-gray-light p-8 rounded-lg shadow-md max-w-md mx-auto mt-16 w-96">
       <h1 className="text-2xl font-bold mb-4">Create a New Recipe</h1>
       <form onSubmit={handleSubmit}>
         <label className="block mb-4">
