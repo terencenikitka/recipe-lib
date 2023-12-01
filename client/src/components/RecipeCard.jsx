@@ -25,9 +25,9 @@ function RecipeCard(props){
 
     return (
         <div className="card-container">
-        <div className="card w-72 h-auto bg-secondary shadow-xl rounded-xl">
+        <div className="card w-72 h-128 bg-secondary shadow-xl rounded-xl">
             <div className="rounded-xl" >
-                <figure className="w-fill h-fill">
+                <figure className="w-full h-2/3">
                     <img src={image} alt={name} className="w-full h-max object-cover rounded-t-xl" />
                 </figure>
                 <div className="card-body p-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
