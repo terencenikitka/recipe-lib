@@ -10,10 +10,11 @@ function RecipeCardPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(id){
     fetch(`http://127.0.0.1:5555/recipes/${id}`)
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          return response.json(); 
         }
         throw new Error("Failed to fetch recipe");
       })
@@ -38,6 +39,7 @@ function RecipeCardPage() {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
+    }
   }, [id, commentInput]); 
 
 
